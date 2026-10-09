@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 820" width="1400" height="820" role="img" aria-labelledby="t d">
+  <title id="t">End-to-end MLOps architecture</title>
+  <desc id="d">Raw data flows through validation, feature store, training with DVC, MLflow registry, CI/CD, Kubernetes and Triton deployment, Prometheus and Evidently monitoring, and retraining triggers back to training.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#111a33"/>
+    </linearGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8aa4d6"/>
+    </marker>
+    <marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff7a90"/>
+    </marker>
+    <style>
+      text{font-family:'Segoe UI',Helvetica,Arial,sans-serif;fill:#e6ecff}
+      .h{font-size:13px;font-weight:700;letter-spacing:.5px}
+      .s{font-size:11px;fill:#a9b8e0}
+      .t{font-size:26px;font-weight:700}
+      .st{font-size:13px;fill:#8aa4d6}
+      .box{stroke-width:1.5;rx:10}
+      .data{fill:#12304a;stroke:#3fa7ff}
+      .feat{fill:#2a2250;stroke:#9b7bff}
+      .train{fill:#16363a;stroke:#2fd1b5}
+      .reg{fill:#3a2a14;stroke:#ffb347}
+      .ci{fill:#2c1f3d;stroke:#e07bff}
+      .dep{fill:#14332a;stroke:#5ee08a}
+      .mon{fill:#3d1d27;stroke:#ff7a90}
+      .lane{fill:none;stroke:#2a3760;stroke-dasharray:4 5;rx:14}
+      .flow{stroke:#8aa4d6;stroke-width:2;fill:none;marker-end:url(#arr)}
+      .loop{stroke:#ff7a90;stroke-width:2.2;fill:none;stroke-dasharray:7 5;marker-end:url(#arrR)}
+    </style>
+  </defs>
+  <rect width="1400" height="820" fill="url(#bg)"/>
+  <text x="40" y="52" class="t">End-to-End MLOps Lifecycle</text>
+  <text x="40" y="76" class="st">Data → Features → Training → Registry → CI/CD → Serving → Monitoring → Retraining</text>
+
+  <!-- lanes -->
+  <rect x="30" y="100" width="1340" height="190" class="lane"/>
+  <text x="46" y="122" class="s">DATA PLANE</text>
+  <rect x="30" y="310" width="1340" height="190" class="lane"/>
+  <text x="46" y="332" class="s">MODEL PLANE</text>
+  <rect x="30" y="520" width="1340" height="270" class="lane"/>
+  <text x="46" y="542" class="s">SERVING &amp; FEEDBACK PLANE</text>
+
+  <!-- Data plane -->
+  <rect x="60" y="150" width="230" height="110" class="box data"/>
+  <text x="80" y="180" class="h">1 · RAW DATA</text>
+  <text x="80" y="202" class="s">S3 / GCS data lake · Kafka streams</text>
+  <text x="80" y="220" class="s">warehouse (BigQuery, Snowflake)</text>
+  <text x="80" y="238" class="s">immutable, partitioned by date</text>
+
+  <rect x="420" y="150" width="250" height="110" class="box data"/>
+  <text x="440" y="180" class="h">2 · DATA VALIDATION</text>
+  <text x="440" y="202" class="s">Great Expectations · Pydantic</text>
+  <text x="440" y="220" class="s">schema + distribution checks</text>
+  <text x="440" y="238" class="s">quarantine bad batches</text>
+
+  <rect x="800" y="150" width="270" height="110" class="box feat"/>
+  <text x="820" y="180" class="h">3 · FEATURE STORE (Feast)</text>
+  <text x="820" y="202" class="s">offline: Parquet / BigQuery (PIT joins)</text>
+  <text x="820" y="220" class="s">online: Redis (ms lookups)</text>
+  <text x="820" y="238" class="s">one definition → train + serve parity</text>
+
+  <path d="M290 205 H420" class="flow"/>
+  <path d="M670 205 H800" class="flow"/>
+
+  <!-- Model plane -->
+  <rect x="800" y="360" width="270" height="110" class="box train"/>
+  <text x="820" y="390" class="h">4 · TRAINING + DVC</text>
+  <text x="820" y="412" class="s">DVC pipeline: data + code hash</text>
+  <text x="820" y="430" class="s">MLflow tracking · Ray / GPU jobs</text>
+  <text x="820" y="448" class="s">reproducible, parameterised runs</text>
+
+  <rect x="420" y="360" width="250" height="110" class="box reg"/>
+  <text x="440" y="390" class="h">5 · MLFLOW REGISTRY</text>
+  <text x="440" y="412" class="s">versions · aliases (champion)</text>
+  <text x="440" y="430" class="s">model cards · approvals · audit</text>
+  <text x="440" y="448" class="s">lineage to data + git SHA</text>
+
+  <rect x="60" y="360" width="230" height="110" class="box ci"/>
+  <text x="80" y="390" class="h">6 · CI/CD AUTOMATION</text>
+  <text x="80" y="412" class="s">GitHub Actions · Argo Workflows</text>
+  <text x="80" y="430" class="s">tests · eval gates · image build</text>
+  <text x="80" y="448" class="s">signed images · GitOps promote</text>
+
+  <path d="M935 260 V360" class="flow"/>
+  <path d="M800 415 H670" class="flow"/>
+  <path d="M420 415 H290" class="flow"/>
+
+  <!-- Serving plane -->
+  <rect x="60" y="580" width="260" height="170" class="box dep"/>
+  <text x="80" y="610" class="h">7 · K8s + TRITON / FASTAPI</text>
+  <text x="80" y="632" class="s">Deployments · HPA · Ingress</text>
+  <text x="80" y="650" class="s">Istio canary / shadow / blue-green</text>
+  <text x="80" y="668" class="s">dynamic batching · GPU pools</text>
+  <text x="80" y="686" class="s">fallback model + circuit breaker</text>
+  <text x="80" y="704" class="s">RBAC · mTLS · API gateway authN</text>
+
+  <rect x="500" y="580" width="270" height="170" class="box mon"/>
+  <text x="520" y="610" class="h">8 · MONITORING</text>
+  <text x="520" y="632" class="s">Prometheus: latency, errors, saturation</text>
+  <text x="520" y="650" class="s">Evidently: data / prediction drift</text>
+  <text x="520" y="668" class="s">Grafana dashboards · Alertmanager</text>
+  <text x="520" y="686" class="s">delayed-label quality metrics</text>
+  <text x="520" y="704" class="s">SLOs + error budgets</text>
+
+  <rect x="950" y="580" width="270" height="170" class="box train"/>
+  <text x="970" y="610" class="h">9 · RETRAINING TRIGGERS</text>
+  <text x="970" y="632" class="s">drift score &gt; threshold</text>
+  <text x="970" y="650" class="s">metric decay vs. baseline</text>
+  <text x="970" y="668" class="s">schedule / new labelled data</text>
+  <text x="970" y="686" class="s">→ kicks off CT pipeline (Argo)</text>
+  <text x="970" y="704" class="s">human approval for risky models</text>
+
+  <path d="M175 470 V580" class="flow"/>
+  <path d="M320 665 H500" class="flow"/>
+  <path d="M770 665 H950" class="flow"/>
+  <!-- retrain loop back to training -->
+  <path d="M1220 665 H1300 V415 H1070" class="loop"/>
+  <text x="1230" y="560" class="s" style="fill:#ff7a90">continuous training loop</text>
+  <!-- prediction logs back to data -->
+  <path d="M640 580 V540 H1330 V205 H1070" class="loop" style="opacity:.55"/>
+  <text x="1090" y="534" class="s" style="fill:#ff7a90">prediction logs + labels → raw data</text>
+</svg>
