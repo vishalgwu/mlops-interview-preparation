@@ -422,5 +422,95 @@ Always stamp the **prediction log** so any prediction is traceable:
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. When asked about feature stores, start with the problem (skew, reuse, PIT) before naming Feast.
+2. Say 'point-in-time' within your first minute; it separates people who have built training sets from those who haven't.
+3. Mention a freshness SLO whenever you mention an online store.
+4. Give the cost of validation (latency, ops) alongside its benefit.
+5. Offer a fallback for every missing-feature scenario; it signals production maturity.
+6. Know when NOT to use a feature store: one model, simple features, shared library may be enough.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: Skew suspected after migration
+
+**Situation.** Online accuracy is 6 points below offline after moving to a feature store.
+
+**What is being evaluated.** Systematic diagnosis of skew versus drift versus leakage.
+
+- ❌ **Weak answer:** Retrain with more data.
+- ✅ **Strong answer:**
+  1. Log served features; recompute offline for the same entity and time; diff per feature.
+  2. Check TTL, materialization lag and default fill rates.
+  3. Check join keys and timezone handling.
+  4. Check for leakage in the offline set via shifted-label test.
+
+**Likely follow-up:** *How do you automate this check?*
+
+### Scenario 2: Late-arriving events
+
+**Situation.** A mobile app uploads events hours late; features and labels change after the fact.
+
+**What is being evaluated.** Event time, watermarks, reproducibility.
+
+- ❌ **Weak answer:** Ignore late data.
+- ✅ **Strong answer:**
+  1. Use event time with watermarks; define allowed lateness.
+  2. Version snapshots for training so reruns are stable.
+  3. Backfill online features with idempotent writes.
+  4. Monitor late-event ratio per source.
+
+**Likely follow-up:** *What do you do about labels that arrive late?*
+
+### Scenario 3: PII in feature tables
+
+**Situation.** Security finds raw emails in a feature table used by 6 models.
+
+**What is being evaluated.** Privacy design and blast-radius control.
+
+- ❌ **Weak answer:** Delete the column and move on.
+- ✅ **Strong answer:**
+  1. Inventory consumers via lineage.
+  2. Replace with tokenised keys; keep the mapping table restricted.
+  3. Purge snapshots and caches; log deletion evidence.
+  4. Add a CI check blocking PII-tagged columns in feature views.
+
+**Likely follow-up:** *How do you handle models already trained on it?*
+
+### Scenario 4: Drift alerts everywhere
+
+**Situation.** Evidently flags 30 of 40 features every day.
+
+**What is being evaluated.** Signal versus noise judgement.
+
+- ❌ **Weak answer:** Raise the threshold until quiet.
+- ✅ **Strong answer:**
+  1. Check reference window and sample sizes; KS on huge N flags everything.
+  2. Switch to effect-size metrics (PSI, Wasserstein) with per-feature thresholds.
+  3. Weight by feature importance; require sustained windows.
+  4. Compare to a seasonal reference.
+
+**Likely follow-up:** *How do you tune thresholds safely?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| Offline vs online store? | History for training vs latest values for ms lookups. |
+| What is materialization? | Copying feature values from offline to online store. |
+| PSI thresholds? | <0.1 ok, 0.1-0.25 watch, >0.25 act. |
+| Why Pydantic at the edge? | Cheap per-request contract enforcement. |
+| Why GX in pipelines? | Dataset-level checks: distributions, uniqueness, row counts. |
+| What does TTL do? | Bounds staleness; older values return null. |
+| Lineage levels? | Dataset, feature, model, prediction. |
+| Fix for hot key in Redis? | Local cache, rate limit, key sharding. |
+
+<!-- deep:end -->
+
 ---
 **Prev:** [← 01](01-mlops-foundations-system-design.md) · **Next:** [03 · Experiment Tracking & Versioning →](03-experiment-tracking-model-versioning.md)

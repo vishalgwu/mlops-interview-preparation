@@ -364,5 +364,95 @@ Failure of any analysis → automatic abort and rollback to stable.
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. Clarify which question you're answering: safe, or better.
+2. Mention sticky assignment and SRM checks whenever A/B is discussed.
+3. State rollback readiness before describing rollout.
+4. Quantify canary steps with traffic and MDE.
+5. Mention guardrail metrics along with the primary metric.
+6. Always describe what you will do if the canary passes but business metrics later fall.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: Low-traffic service canary
+
+**Situation.** Only 50 RPS; a 5% canary yields 2.5 RPS.
+
+**What is being evaluated.** Adapting strategy to low volume.
+
+- ❌ **Weak answer:** Use 5% anyway.
+- ✅ **Strong answer:**
+  1. Use longer bake time and replay production logs.
+  2. Synthetic probes plus shadow for technical checks.
+  3. Larger canary percent during low-risk hours.
+  4. Use proxy metrics with higher event rate.
+
+**Likely follow-up:** *How do you compute needed duration?*
+
+### Scenario 2: A/B with novelty effect
+
+**Situation.** New ranking model shows +4% in week one, +0.5% in week three.
+
+**What is being evaluated.** Experiment validity.
+
+- ❌ **Weak answer:** Ship based on week one.
+- ✅ **Strong answer:**
+  1. Recognise novelty/learning effect.
+  2. Run to planned horizon; use cohort analysis by exposure time.
+  3. Check long-term metrics and retention guardrails.
+  4. Decide on steady-state effect.
+
+**Likely follow-up:** *How long should the test run?*
+
+### Scenario 3: Canary passes, harm later
+
+**Situation.** Fraud model canary passed; chargebacks rise 40 days later.
+
+**What is being evaluated.** Delayed outcome handling.
+
+- ❌ **Weak answer:** Blame labels.
+- ✅ **Strong answer:**
+  1. Keep a holdback group on old model beyond full rollout.
+  2. Use proxy leading indicators during canary.
+  3. Alert on delayed metrics post-100%.
+  4. Rollback criteria include delayed metric thresholds.
+
+**Likely follow-up:** *How large should the holdback be?*
+
+### Scenario 4: Shadow writes to prod
+
+**Situation.** Shadow candidate sent real emails.
+
+**What is being evaluated.** Safety design.
+
+- ❌ **Weak answer:** Fix the bug.
+- ✅ **Strong answer:**
+  1. Make shadow read-only by design: no write credentials, flag-based side-effect suppression.
+  2. Mirror at mesh level with separate identity.
+  3. Contract test that shadow mode has zero writes.
+  4. Post-incident review.
+
+**Likely follow-up:** *How do you test side-effect suppression?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| Canary vs shadow? | Limited live exposure vs zero exposure mirror. |
+| SRM? | Arm counts deviate from design; test invalid. |
+| Blue/green rollback? | Flip the selector back. |
+| Sticky canary? | Consistent hash on user id. |
+| Why AnalysisTemplate? | Automates rollback decisions on metrics. |
+| Expand/contract? | Additive schema changes for safe rollback. |
+| Interleaving? | Mix rankings to compare with less traffic. |
+| Bandit downside? | Weak inference, delayed outcomes issues. |
+
+<!-- deep:end -->
+
 ---
 **Prev:** [← 06](06-model-serving-architecture.md) · **Next:** [08 · Monitoring & Observability →](08-monitoring-observability-alerting.md)

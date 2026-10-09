@@ -296,5 +296,95 @@ Orchestrator (Airflow/Argo) → validate features partition → Spark/Ray scorin
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. Spend the first 5 minutes on requirements and metrics; never draw boxes first.
+2. Narrate trade-offs: 'option A gives X at cost Y; I pick A because Z'.
+3. Quantify: QPS, storage, GPU count, cost per 1k predictions.
+4. Reserve 10 minutes for day-2 operations.
+5. If stuck, state your assumption and move on.
+6. Close by summarising risks and what you'd do in v2.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: Design a RAG platform
+
+**Situation.** Design an internal question-answering platform over 5 million documents.
+
+**What is being evaluated.** Breadth plus depth on LLM systems.
+
+- ❌ **Weak answer:** Draw a vector DB and an LLM.
+- ✅ **Strong answer:**
+  1. Requirements: freshness, latency, access control, quality metric.
+  2. Ingestion: chunking, embeddings, index versioning, ACL metadata.
+  3. Serving: retrieval + rerank, LLM with citations, guardrails, caching.
+  4. Operate: eval suite as CI gate, drift in retrieval recall, cost per query, rollback of index.
+
+**Likely follow-up:** *How do you enforce document-level permissions?*
+
+### Scenario 2: Cut inference cost 50%
+
+**Situation.** Inference spend must drop by half without losing quality.
+
+**What is being evaluated.** Cost optimisation judgement.
+
+- ❌ **Weak answer:** Switch to cheaper hardware.
+- ✅ **Strong answer:**
+  1. Measure cost per prediction and utilisation.
+  2. Batching, quantisation, caching, cascades.
+  3. Spot for batch/training; autoscale tuning.
+  4. Track quality guardrails.
+
+**Likely follow-up:** *Which lever first and why?*
+
+### Scenario 3: Multi-tenant platform
+
+**Situation.** 50 data scientists need self-service ML infrastructure.
+
+**What is being evaluated.** Platform thinking.
+
+- ❌ **Weak answer:** Give everyone cluster access.
+- ✅ **Strong answer:**
+  1. Golden path templates with CI and monitoring defaults.
+  2. Namespaced registry, quotas, GPU queues.
+  3. Policy-as-code, cost attribution.
+  4. Metrics: time-to-first-deploy, percent monitored.
+
+**Likely follow-up:** *How do you handle escape hatches?*
+
+### Scenario 4: Interview curveball
+
+**Situation.** Midway, the interviewer changes the requirement to 10x traffic.
+
+**What is being evaluated.** Adaptability.
+
+- ❌ **Weak answer:** Restart the design.
+- ✅ **Strong answer:**
+  1. Restate the change and new numbers.
+  2. Identify bottlenecks that break first.
+  3. Adjust incrementally: caching, sharding, async, autoscaling.
+  4. Call out cost and complexity trade-offs.
+
+**Likely follow-up:** *What breaks at 100x?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| Design framework? | R-A-D-I-O-M. |
+| Axes of trade-off? | Latency, cost, freshness, quality, risk. |
+| GBDT often right? | Tabular accuracy, speed, explainability. |
+| What to cover day-2? | Monitoring, rollback, ownership, cost, security. |
+| Fail-open decision? | Business risk per use case. |
+| A/B pitfall? | Peeking, SRM, novelty. |
+| Cost per prediction? | Total infra cost / predictions served. |
+| Always end with? | Risks and v2 plan. |
+
+<!-- deep:end -->
+
 ---
 **Prev:** [← 11](11-production-failures-troubleshooting.md) · **Home:** [README](README.md)

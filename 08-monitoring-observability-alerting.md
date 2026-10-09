@@ -354,5 +354,95 @@ curl -X POST -H "Authorization: Bearer $GRAFANA_TOKEN" -H 'Content-Type: applica
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. Say 'symptoms page, causes ticket' early; it shows alert design maturity.
+2. Distinguish drift types precisely; many candidates blur them.
+3. Always mention label delay when asked about quality monitoring.
+4. Mention slices when asked about monitoring depth.
+5. Describe thresholds as calibrated from history, not magic numbers.
+6. Bring up cardinality when you mention Prometheus labels.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: Quality fell, no drift
+
+**Situation.** AUC dropped 5 points but PSI is quiet.
+
+**What is being evaluated.** Concept drift versus pipeline issues.
+
+- ❌ **Weak answer:** Retrain.
+- ✅ **Strong answer:**
+  1. Check label definition/pipeline changes.
+  2. Check slice-level performance and calibration.
+  3. Check P(Y|X) shift with recent labels.
+  4. Check upstream semantic changes not visible in marginals.
+
+**Likely follow-up:** *How do you detect concept drift earlier?*
+
+### Scenario 2: Pushgateway stale
+
+**Situation.** Drift dashboard shows constant values for 3 days.
+
+**What is being evaluated.** Monitoring the monitors.
+
+- ❌ **Weak answer:** Ignore.
+- ✅ **Strong answer:**
+  1. Job died; last pushed values persist.
+  2. Alert on push_time_seconds staleness.
+  3. Use heartbeat metric.
+  4. Prefer pull-based exporter for continuous jobs.
+
+**Likely follow-up:** *What else needs a heartbeat?*
+
+### Scenario 3: Seasonal false alarms
+
+**Situation.** Drift alerts fire every Monday.
+
+**What is being evaluated.** Reference selection.
+
+- ❌ **Weak answer:** Disable alerts.
+- ✅ **Strong answer:**
+  1. Use same-weekday reference or STL-decomposed thresholds.
+  2. Two references: training and rolling seasonal.
+  3. Sustained-window requirement.
+  4. Annotate known events.
+
+**Likely follow-up:** *How do you handle one-off promotions?*
+
+### Scenario 4: On-call overload
+
+**Situation.** 30 pages per week; 25 are not actionable.
+
+**What is being evaluated.** Alert hygiene.
+
+- ❌ **Weak answer:** Hire more on-call.
+- ✅ **Strong answer:**
+  1. Classify alerts by actionability.
+  2. Delete or convert to tickets.
+  3. Multi-window burn rates.
+  4. Monthly precision review.
+
+**Likely follow-up:** *What target alert precision?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| RED metrics? | Rate, errors, duration. |
+| USE metrics? | Utilisation, saturation, errors. |
+| Histogram vs summary? | Histogram aggregates across pods. |
+| Prior shift? | P(Y) changes. |
+| Label coverage? | Fraction of predictions with labels yet. |
+| Burn rate? | Speed of consuming error budget. |
+| Why reference windows? | Define baseline for drift. |
+| Alert needs? | Owner, runbook, action. |
+
+<!-- deep:end -->
+
 ---
 **Prev:** [← 07](07-deployment-strategies-traffic-routing.md) · **Next:** [09 · Infrastructure & Orchestration →](09-infrastructure-containerization-orchestration.md)

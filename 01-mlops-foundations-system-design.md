@@ -336,5 +336,95 @@ Run: `dvc repro` — only stages with changed deps/params re-execute.
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. Open every design answer with the lifecycle: data, code, model, and which one is changing in this problem.
+2. Use the word 'blast radius' when choosing process weight; it shows you scale controls to risk.
+3. When asked about debt, name one concrete example from your own work, not a textbook definition.
+4. Pair every problem you raise with a detection signal and an owner; interviewers score 'how would you know'.
+5. Avoid tool lists in the first two minutes. Principles first, tools as examples.
+6. If you don't know a number, estimate it out loud and state your assumption; silence costs more than a rough guess.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: Inherited a Level 0 team
+
+**Situation.** You join a team where a data scientist emails a pickle to an engineer every release. Leadership wants 'MLOps' in a quarter.
+
+**What is being evaluated.** Prioritisation, scoping, pragmatism over platform-building.
+
+- ❌ **Weak answer:** Propose adopting Kubeflow, a feature store and a registry at once.
+- ✅ **Strong answer:**
+  1. Baseline: time from idea to production, incidents, reproducibility rate.
+  2. Month 1: containerised env, single train entrypoint, DVC + MLflow, one eval gate.
+  3. Month 2: serving template, health checks, drift alert, rollback runbook.
+  4. Month 3: CI for pipeline code, scheduled retrain; revisit platform only if multiple teams hit the same wall.
+
+**Likely follow-up:** *Which of these would you cut if you only had two weeks?*
+
+### Scenario 2: Recommender metric inflation
+
+**Situation.** CTR rose 15% over six months but revenue per user is flat. The model is retrained weekly on clicks.
+
+**What is being evaluated.** Recognising hidden feedback loops and metric gaming.
+
+- ❌ **Weak answer:** Say the model is improving and tune more.
+- ✅ **Strong answer:**
+  1. Hypothesis: model shows what it already knows users click, narrowing exposure.
+  2. Check diversity, catalogue coverage and holdout-group revenue.
+  3. Add exploration traffic with logged propensities; train with inverse-propensity weights.
+  4. Evaluate on a never-personalised holdout and optimise for long-term value, not clicks.
+
+**Likely follow-up:** *How big should the exploration slice be and who pays for it?*
+
+### Scenario 3: Two teams, one dataset
+
+**Situation.** Team A's model degrades after Team B 'cleans' a shared table. No one was told.
+
+**What is being evaluated.** Data dependencies, contracts, undeclared consumers.
+
+- ❌ **Weak answer:** Ask teams to communicate more.
+- ✅ **Strong answer:**
+  1. Introduce a data contract with owner, schema and SLA.
+  2. Consumer registry via lineage so changes notify downstream owners.
+  3. CI on the producer that runs downstream contract tests.
+  4. Versioned tables for breaking changes with a deprecation window.
+
+**Likely follow-up:** *How do you enforce this without slowing Team B?*
+
+### Scenario 4: Justify a platform investment
+
+**Situation.** Finance asks why you need three engineers for an ML platform when models already ship.
+
+**What is being evaluated.** Business framing and measurable outcomes.
+
+- ❌ **Weak answer:** Say it is best practice.
+- ✅ **Strong answer:**
+  1. Quantify current cost: lead time, incidents, duplicated work, idle GPU.
+  2. Define target metrics: lead time, change-failure rate, MTTR, percent models with monitoring.
+  3. Stage investment; show a paved road for one team first.
+  4. Agree on a kill criterion if metrics don't move.
+
+**Likely follow-up:** *What would make you say the platform was not worth it?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| What are the three lifecycles? | Code, data and model, each versioned and changing on its own clock. |
+| Define training/serving skew. | Same feature computed differently at train and serve time. |
+| What is CACE? | Changing anything changes everything: entanglement of features. |
+| Level 1 in one line? | Automated pipeline that retrains and registers without a human running steps. |
+| Level 2 in one line? | Automated CI/CD of the pipeline itself plus gated promotion. |
+| Silent failure meaning? | HTTP 200 with degraded predictions and no exception. |
+| Fix for hidden feedback loops? | Exploration slice, logged propensities, never-treated holdout. |
+| One metric for delivery health? | Lead time from change to production model. |
+
+<!-- deep:end -->
+
 ---
 **Next:** [02 · Data Engineering & Feature Stores →](02-data-engineering-feature-stores.md)

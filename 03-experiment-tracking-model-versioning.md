@@ -361,5 +361,95 @@ def seed_everything(seed: int = 42, deterministic: bool = True):
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. Describe reproducibility as a checklist: code SHA, data hash, params, environment, seed, hardware.
+2. When given a metric improvement, ask about variance and confidence intervals before celebrating.
+3. Mention the tracking-server cost model (rows per run) to show you've operated one.
+4. Distinguish exploration runs from candidate runs; it shows governance awareness.
+5. State that you select on validation and touch test once.
+6. For DVC questions, explain pointers in Git plus content-addressed remote in one sentence.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: Unreproducible champion
+
+**Situation.** A year-old production model must be rebuilt; the repo has changed and the data bucket was overwritten.
+
+**What is being evaluated.** Failure analysis and preventive design.
+
+- ❌ **Weak answer:** Try to approximate with current data.
+- ✅ **Strong answer:**
+  1. Pull the registry version's run tags for git sha, data version and image digest.
+  2. If data was overwritten, assess whether a snapshot exists; if not, record the gap.
+  3. Rebuild env from the lockfile and run with fixed seeds.
+  4. Prevent: immutable content-addressed data, object lock, registration blocked without data hash.
+
+**Likely follow-up:** *What retention policy do you set for data versus models?*
+
+### Scenario 2: Noisy model comparison
+
+**Situation.** Candidate beats champion by 0.004 AUC on one seed.
+
+**What is being evaluated.** Statistical judgement.
+
+- ❌ **Weak answer:** Ship it.
+- ✅ **Strong answer:**
+  1. Run 5-10 seeds; report mean and interval.
+  2. Bootstrap the holdout; paired comparison.
+  3. Check slices and calibration.
+  4. Ship only if the gain exceeds noise and no slice regresses.
+
+**Likely follow-up:** *How many seeds are enough?*
+
+### Scenario 3: Tracking DB meltdown
+
+**Situation.** A hyperparameter search of 8,000 trials slows the MLflow UI to a crawl.
+
+**What is being evaluated.** Operational maturity.
+
+- ❌ **Weak answer:** Upgrade the instance.
+- ✅ **Strong answer:**
+  1. Reduce write volume: log every N steps, use log_batch.
+  2. Parent run holds summary; children minimal.
+  3. Early stopping to cut trial count.
+  4. Index and retention in Postgres; scale stateless server horizontally.
+
+**Likely follow-up:** *What would you move out of MLflow entirely?*
+
+### Scenario 4: Notebook promotion
+
+**Situation.** A researcher's notebook model scored best. They want it in production tomorrow.
+
+**What is being evaluated.** Balancing speed and governance.
+
+- ❌ **Weak answer:** Block it.
+- ✅ **Strong answer:**
+  1. Mark as exploration; it cannot be registered.
+  2. Pair to convert into the pipeline entrypoint in a day.
+  3. CI runs tests, gates and data checks.
+  4. Fast path exists for exploration, not for skipping lineage.
+
+**Likely follow-up:** *What if they refuse?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| MLflow backend vs artifact store? | DB for metadata, object store for files. |
+| Why log input example and signature? | Safe serving and schema validation. |
+| DVC pointer file? | .dvc file with hash in Git; data in remote. |
+| W&B vs MLflow? | SaaS UX and sweeps vs self-host and registry. |
+| Seed everything including? | Python, NumPy, framework, dataloader workers. |
+| What breaks determinism on GPU? | Atomic ops and non-deterministic kernels. |
+| dvc repro? | Re-runs only stages with changed deps or params. |
+| What do you tag a run with? | git sha, dirty flag, data hash, image digest. |
+
+<!-- deep:end -->
+
 ---
 **Prev:** [← 02](02-data-engineering-feature-stores.md) · **Next:** [04 · Model Registry & Governance →](04-model-registry-governance.md)

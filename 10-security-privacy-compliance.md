@@ -393,5 +393,95 @@ Authentication choices: **API keys** (simple, per-client, rotate; weak identity)
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. Frame answers with a threat model: asset, adversary, control.
+2. Always mention rate limits and output minimisation for model extraction.
+3. Use 'least privilege' and 'workload identity' for platform questions.
+4. Describe DP and FL as complementary, not alternatives.
+5. Mention pickle risk and signed artifacts.
+6. Mention log redaction and retention for privacy.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: Extraction in progress
+
+**Situation.** A competitor's account queries your API systematically.
+
+**What is being evaluated.** Detection and response.
+
+- ❌ **Weak answer:** Block them.
+- ✅ **Strong answer:**
+  1. Monitor query diversity and patterns per key.
+  2. Throttle, then bucket outputs.
+  3. Preserve logs for legal action.
+  4. Add watermark canary outputs.
+
+**Likely follow-up:** *How do you keep paying customers happy?*
+
+### Scenario 2: Poisoned feedback
+
+**Situation.** A bot farm manipulates thumbs-up feedback used for training.
+
+**What is being evaluated.** Data integrity.
+
+- ❌ **Weak answer:** Ignore noisy labels.
+- ✅ **Strong answer:**
+  1. Limit per-user influence and use reputation weighting.
+  2. Anomaly detection on feedback patterns.
+  3. Golden-set regression checks.
+  4. Human review sample before training.
+
+**Likely follow-up:** *How do you recover a model already trained?*
+
+### Scenario 3: Leaked token
+
+**Situation.** An API key appears in a public repo.
+
+**What is being evaluated.** Incident response.
+
+- ❌ **Weak answer:** Remove from repo.
+- ✅ **Strong answer:**
+  1. Revoke and rotate immediately.
+  2. Audit usage during exposure.
+  3. Secret scanning in CI and pre-commit.
+  4. Move to workload identity.
+
+**Likely follow-up:** *How to prevent recurrence?*
+
+### Scenario 4: Erasure request
+
+**Situation.** User requests deletion; data is in features, snapshots and logs.
+
+**What is being evaluated.** Compliance operations.
+
+- ❌ **Weak answer:** Delete DB row.
+- ✅ **Strong answer:**
+  1. Lineage to find all copies.
+  2. Delete/tokenise and record evidence.
+  3. Exclude from future training.
+  4. Assess memorisation and retrain timeline.
+
+**Likely follow-up:** *How do you prove it?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| Pickle risk? | Arbitrary code execution on load. |
+| JWT alg confusion? | Accepting none/HS with public key. |
+| DP epsilon? | Privacy loss bound. |
+| FL leak? | Updates reveal data; add secure aggregation. |
+| mTLS purpose? | Service identity and encryption. |
+| RBAC principle? | Least privilege. |
+| Membership inference? | Detect if record was in training. |
+| Why bucket outputs? | Reduce extraction fidelity. |
+
+<!-- deep:end -->
+
 ---
 **Prev:** [← 09](09-infrastructure-containerization-orchestration.md) · **Next:** [11 · Production Failures & Troubleshooting →](11-production-failures-troubleshooting.md)

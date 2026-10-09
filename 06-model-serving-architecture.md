@@ -422,5 +422,95 @@ flowchart LR
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. Start with latency, throughput, freshness and cost numbers before choosing a pattern.
+2. Mention warm-up, readiness and graceful shutdown in any serving answer.
+3. Describe batching as a throughput-latency trade-off with a number.
+4. Explain fallbacks and timeouts per stage.
+5. Know when FastAPI is enough; do not over-engineer with Triton.
+6. For streaming, say 'at-least-once plus idempotent sink'.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: Peak traffic latency
+
+**Situation.** Black Friday doubles traffic; p99 triples while p50 stays flat.
+
+**What is being evaluated.** Tail-latency reasoning.
+
+- ❌ **Weak answer:** Add replicas.
+- ✅ **Strong answer:**
+  1. Check CPU throttling, queue depth and per-stage latency.
+  2. Look for sync blocking and unbounded queues.
+  3. Apply load shedding and per-stage timeouts.
+  4. Pre-scale based on traffic forecast and queue-depth metrics.
+
+**Likely follow-up:** *How do you test this before the event?*
+
+### Scenario 2: GPU model underutilised
+
+**Situation.** GPU utilisation is 20% but latency is high.
+
+**What is being evaluated.** Batching and concurrency understanding.
+
+- ❌ **Weak answer:** Buy faster GPUs.
+- ✅ **Strong answer:**
+  1. Check request concurrency and batch size; single-request serving wastes the GPU.
+  2. Enable dynamic batching with tuned queue delay.
+  3. Multiple instances per GPU.
+  4. Profile preprocessing on CPU as a bottleneck.
+
+**Likely follow-up:** *How do you choose max queue delay?*
+
+### Scenario 3: Stream consumer duplicates
+
+**Situation.** After a rebalance, scores are written twice.
+
+**What is being evaluated.** Delivery semantics.
+
+- ❌ **Weak answer:** Claim exactly-once.
+- ✅ **Strong answer:**
+  1. At-least-once is expected on rebalance.
+  2. Idempotent writes keyed by event id.
+  3. Commit offsets after durable output.
+  4. Monitor duplicate rate.
+
+**Likely follow-up:** *What if the sink is an external API?*
+
+### Scenario 4: Model too large for one GPU
+
+**Situation.** A 30B parameter model must serve under 1s latency.
+
+**What is being evaluated.** Scaling options.
+
+- ❌ **Weak answer:** Use a bigger GPU.
+- ✅ **Strong answer:**
+  1. Quantise (INT8/FP8/4-bit); measure quality loss.
+  2. Tensor/pipeline parallelism with vLLM/TensorRT-LLM.
+  3. Distil or route easy requests to a smaller model.
+  4. Benchmark tokens/s and p99 at target concurrency.
+
+**Likely follow-up:** *What accuracy loss is acceptable?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| Batch vs online? | Precompute when entity set is bounded. |
+| gRPC vs REST? | Binary, strict schema, streaming vs ubiquitous, debuggable. |
+| Dynamic batching? | Group requests to raise throughput at some latency cost. |
+| Readiness meaning? | Model loaded, warmed, dependencies ok. |
+| Why to_thread? | Keeps event loop free from CPU-bound inference. |
+| Triton config key? | max_batch_size, instance_group, dynamic_batching. |
+| Atomic batch publish? | Write temp path then rename/commit. |
+| Why version endpoints? | Additive changes, safe client evolution. |
+
+<!-- deep:end -->
+
 ---
 **Prev:** [← 05](05-cicd-ct-automation-pipelines.md) · **Next:** [07 · Deployment Strategies →](07-deployment-strategies-traffic-routing.md)

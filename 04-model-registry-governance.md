@@ -323,5 +323,95 @@ def audited_set_alias(client, name, alias, version, reason: str, ticket: str):
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. Say 'aliases and tags' not just 'stages'; it shows you track MLflow's direction.
+2. Describe promotion as code (gates) plus a human control for high-risk models.
+3. Always connect governance to a concrete artifact: model card, audit log, approval record.
+4. Explain rollback time as an SLO you have tested.
+5. Mention segregation of duties explicitly; auditors care.
+6. When asked about registry downtime, describe last-known-good loading.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: Auditor request
+
+**Situation.** An auditor asks for evidence that a loan model was validated and approved before use.
+
+**What is being evaluated.** Governance and traceability.
+
+- ❌ **Weak answer:** Show the Slack approval.
+- ✅ **Strong answer:**
+  1. Registry version links to run, git sha, data version and image digest.
+  2. Gate report stored as artifact; approver identity from protected environment.
+  3. Model card with intended use, slices, limitations.
+  4. Immutable audit log of alias changes with ticket references.
+
+**Likely follow-up:** *What gaps would an auditor find in your current setup?*
+
+### Scenario 2: Registry outage
+
+**Situation.** The registry is down while a deploy and autoscale event happen.
+
+**What is being evaluated.** Resilience design.
+
+- ❌ **Weak answer:** Wait for it to recover.
+- ✅ **Strong answer:**
+  1. Serving should not depend on registry at runtime; artifacts baked or cached with checksum.
+  2. Pods start from last-known-good local copy.
+  3. Deployments pin versions in manifests.
+  4. Registry outage then blocks promotion only, not serving.
+
+**Likely follow-up:** *How do you test this?*
+
+### Scenario 3: Concurrent promotions
+
+**Situation.** Two pipelines set the champion alias within seconds of each other.
+
+**What is being evaluated.** Concurrency control.
+
+- ❌ **Weak answer:** Hope it doesn't happen.
+- ✅ **Strong answer:**
+  1. Single promotion service serialising changes.
+  2. Optimistic check on expected previous version.
+  3. Audit event on every move.
+  4. Reject stale promotions and notify owners.
+
+**Likely follow-up:** *How do you detect after the fact that it happened?*
+
+### Scenario 4: Model without preprocessing
+
+**Situation.** Registered model expects scaled inputs but the service sends raw ones; accuracy drops.
+
+**What is being evaluated.** Packaging discipline.
+
+- ❌ **Weak answer:** Tell clients to scale.
+- ✅ **Strong answer:**
+  1. Package preprocessing with the model (pipeline or pyfunc).
+  2. Signature enforcement in the gate.
+  3. Contract test in CI hitting the packaged model with raw input.
+  4. Version equals full function.
+
+**Likely follow-up:** *How do you roll out the fix without breaking clients?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| Stages vs aliases? | Fixed lifecycle slots vs movable named pointers. |
+| Why tags? | Free-form state like validation=passed. |
+| What is a model card? | Intended use, data, slice metrics, limits, approvals. |
+| Rollback by alias? | Re-point to the previous version; no rebuild. |
+| Segregation of duties? | Builder is not approver. |
+| Audit trail content? | Actor, model, from, to, reason, ticket, time. |
+| Why pin versions in manifests? | Registry change should not equal unreviewed prod change. |
+| Safe artifact formats? | ONNX or safetensors, signed. |
+
+<!-- deep:end -->
+
 ---
 **Prev:** [← 03](03-experiment-tracking-model-versioning.md) · **Next:** [05 · CI/CD/CT Automation →](05-cicd-ct-automation-pipelines.md)

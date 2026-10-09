@@ -409,5 +409,95 @@ Other degradations: **load shedding** (reject low-priority traffic with 429 when
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. Say 'mitigate first' before diagnosing; interviewers watch for incident discipline.
+2. Use concrete tools: py-spy, tracemalloc, memray, DCGM.
+3. Describe fallback tiers and who decides fail-open versus fail-closed.
+4. Tell one real postmortem story with detection gap.
+5. Mention load shedding and bulkheads for overload.
+6. Always add a prevention control to your answer.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: GPU OOM after model update
+
+**Situation.** New model version OOMs at peak; old version was fine.
+
+**What is being evaluated.** Capacity and rollout analysis.
+
+- ❌ **Weak answer:** Roll back and forget.
+- ✅ **Strong answer:**
+  1. Roll back for impact.
+  2. Compare memory per request, max sequence length, batch.
+  3. Load test at worst-case shapes.
+  4. Add memory budget gate to promotion.
+
+**Likely follow-up:** *What gate metric would you add?*
+
+### Scenario 2: Cold start storm
+
+**Situation.** After autoscale, new pods take 90 seconds and errors spike.
+
+**What is being evaluated.** Startup optimisation.
+
+- ❌ **Weak answer:** Increase replicas.
+- ✅ **Strong answer:**
+  1. Measure each cold-start component.
+  2. Warm-up before ready; pre-pulled images.
+  3. Min replicas and overprovision pods.
+  4. Gradual traffic ramp (slow start).
+
+**Likely follow-up:** *What is your target time to ready?*
+
+### Scenario 3: Feature store partial outage
+
+**Situation.** 20% of keys return nulls.
+
+**What is being evaluated.** Degradation design.
+
+- ❌ **Weak answer:** Return errors.
+- ✅ **Strong answer:**
+  1. Detect via missing-rate metric.
+  2. Defaults flagged degraded; fallback model.
+  3. Circuit breaker on the store.
+  4. Exclude degraded rows from training; post-incident freshness SLO.
+
+**Likely follow-up:** *How do you decide fail-open?*
+
+### Scenario 4: Hang without CPU
+
+**Situation.** Service stuck, CPU idle, liveness green.
+
+**What is being evaluated.** Concurrency debugging.
+
+- ❌ **Weak answer:** Restart pods.
+- ✅ **Strong answer:**
+  1. py-spy dump to find wait site.
+  2. Check pools, timeouts, fork+CUDA.
+  3. Add bulkhead and deadlines.
+  4. Liveness that exercises request path.
+
+**Likely follow-up:** *Why was liveness green?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| Exit code 137? | OOMKilled. |
+| Leak vs burst? | Monotonic growth vs load-correlated spikes. |
+| MALLOC_ARENA_MAX? | Reduces glibc fragmentation. |
+| Why jitter on recycle? | Avoid synchronised restarts. |
+| Circuit breaker? | Stop calling a failing dependency. |
+| Load shedding? | Reject low-priority work to protect latency. |
+| Fail-open? | Allow when system degraded; business decision. |
+| Postmortem key? | Detection gap and prevention. |
+
+<!-- deep:end -->
+
 ---
 **Prev:** [← 10](10-security-privacy-compliance.md) · **Next:** [12 · Interview Cheatsheet & System Design →](12-mlops-interview-cheatsheet-system-design.md)

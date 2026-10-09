@@ -441,5 +441,95 @@ minikube image load fraud-api:dev && kubectl apply -f deploy/k8s/ && kubectl -n 
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. State resource requests/limits with reasons, not defaults.
+2. Mention probes and graceful shutdown for any Kubernetes answer.
+3. Explain GPU node cold start when discussing autoscaling.
+4. Contrast Ray and Spark by workload shape.
+5. Mention supply-chain controls for images.
+6. Mention PDB and topology spread for availability.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: Node drain outage
+
+**Situation.** A node upgrade took all three replicas offline.
+
+**What is being evaluated.** Availability design.
+
+- ❌ **Weak answer:** Add replicas.
+- ✅ **Strong answer:**
+  1. PDB with minAvailable.
+  2. Topology spread across nodes/zones.
+  3. Graceful termination and preStop.
+  4. Rolling node upgrades with surge.
+
+**Likely follow-up:** *How do you test this?*
+
+### Scenario 2: GPU pods pending
+
+**Situation.** New GPU replicas stay Pending for 10 minutes.
+
+**What is being evaluated.** Capacity planning.
+
+- ❌ **Weak answer:** Request more quota.
+- ✅ **Strong answer:**
+  1. Check taints, quota, fragmentation.
+  2. Warm node pool or overprovisioning pods.
+  3. Smaller GPU slices with MIG.
+  4. Scale on leading indicator (queue depth).
+
+**Likely follow-up:** *What cost trade-off?*
+
+### Scenario 3: Huge image pull
+
+**Situation.** 8 GB image causes 5-minute rollouts.
+
+**What is being evaluated.** Build optimisation.
+
+- ❌ **Weak answer:** Accept it.
+- ✅ **Strong answer:**
+  1. Multi-stage, slim runtime base.
+  2. Separate model from image; cache by checksum.
+  3. Pre-pull DaemonSet; registry mirror.
+  4. Lazy-pull snapshotter.
+
+**Likely follow-up:** *How do you measure improvement?*
+
+### Scenario 4: Spark skew
+
+**Situation.** One executor runs 40 minutes while others finish in 3.
+
+**What is being evaluated.** Distributed data debugging.
+
+- ❌ **Weak answer:** More executors.
+- ✅ **Strong answer:**
+  1. Identify hot key.
+  2. Salting or AQE skew join.
+  3. Repartition by better key.
+  4. Broadcast small side.
+
+**Likely follow-up:** *How to find the hot key?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| Request vs limit? | Scheduling vs enforcement. |
+| OOMKilled meaning? | Memory limit exceeded. |
+| HPA custom metric? | Scale on in-flight, queue depth. |
+| KEDA use? | Event-driven scaling, scale to zero. |
+| Startup probe? | Protects slow-start from liveness. |
+| PDB? | Minimum available during disruptions. |
+| Ingress vs Service? | L7 routing vs stable internal VIP. |
+| Ray Serve? | Python model serving and composition. |
+
+<!-- deep:end -->
+
 ---
 **Prev:** [← 08](08-monitoring-observability-alerting.md) · **Next:** [10 · Security, Privacy & Compliance →](10-security-privacy-compliance.md)

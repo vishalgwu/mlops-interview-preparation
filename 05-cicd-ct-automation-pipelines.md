@@ -384,5 +384,95 @@ compiler.Compiler().compile(pipeline, "fraud_ct.yaml")
 
 <!-- appendix:end -->
 
+<!-- deep:start -->
+
+## Interview Playbook: Tips & Tricks
+
+1. Describe CI, CD, CT as three different triggers and three different questions.
+2. Mention smoke-train on a sample for PRs and full training out-of-band.
+3. State a cooldown and debounce whenever you describe automatic retraining.
+4. Talk about gates in terms of champion comparison on frozen and recent data.
+5. Mention digest pinning and image signing when asked about supply chain.
+6. Quote DORA-style metrics adapted to ML.
+
+## Scenario-Based Evaluation
+
+Each scenario shows what the interviewer is really testing, the answer that loses points, and the answer that earns them.
+
+### Scenario 1: Flaky model tests block CI
+
+**Situation.** Behavioural tests fail randomly 1 in 8 runs.
+
+**What is being evaluated.** Test design under non-determinism.
+
+- ❌ **Weak answer:** Retry until green.
+- ✅ **Strong answer:**
+  1. Seed, fix tolerance-based assertions.
+  2. Statistical assertions (rate over many samples) instead of exact equality.
+  3. Quarantine with a ticket and owner, not deletion.
+  4. Separate fast deterministic tests from slow statistical ones.
+
+**Likely follow-up:** *How do you decide what to quarantine?*
+
+### Scenario 2: Nightly retrain shipped a worse model
+
+**Situation.** Auto-promotion pushed a model that lowered conversion 3%.
+
+**What is being evaluated.** Gate design and post-incident learning.
+
+- ❌ **Weak answer:** Turn off retraining.
+- ✅ **Strong answer:**
+  1. Roll back via alias/manifest.
+  2. Postmortem: which gate was missing (recent-slice eval, canary KPI)?
+  3. Add champion comparison on frozen and recent slices; cooldown; canary analysis.
+  4. Tier risk: require approval for high-impact models.
+
+**Likely follow-up:** *What would you automate versus keep manual?*
+
+### Scenario 3: Slow pipeline
+
+**Situation.** CI takes 50 minutes and developers bypass it.
+
+**What is being evaluated.** Developer-experience thinking.
+
+- ❌ **Weak answer:** Add more runners.
+- ✅ **Strong answer:**
+  1. Profile stages; cache deps and data.
+  2. Smoke-train on 1% sample on PRs.
+  3. Run full training nightly.
+  4. Path filters so docs changes skip training.
+
+**Likely follow-up:** *What is an acceptable CI time?*
+
+### Scenario 4: Drift alert flapping
+
+**Situation.** Alert triggers retrain 12 times in a day.
+
+**What is being evaluated.** Control-loop design.
+
+- ❌ **Weak answer:** Raise threshold.
+- ✅ **Strong answer:**
+  1. Debounce window and sustained-drift requirement.
+  2. Cooldown after each retrain.
+  3. Concurrency Forbid and daily budget.
+  4. Alert on retrain frequency.
+
+**Likely follow-up:** *How do you know the retrain helped?*
+
+## Rapid-Fire Round
+
+| Question | One-line answer |
+|---|---|
+| CI vs CT? | Code change verification vs data/drift-triggered training. |
+| What is a gate? | Automated policy check blocking promotion. |
+| Why GitOps for deploy? | Git history is the change record. |
+| Argo vs Actions? | Long DAG/GPU jobs vs repo-centric CI/CD. |
+| Directional test? | More income should not lower approval probability. |
+| Invariance test? | Irrelevant feature changes must not change output. |
+| Retrain storm? | Many triggered retrains from a flapping alert. |
+| Pin image by? | Digest, not tag. |
+
+<!-- deep:end -->
+
 ---
 **Prev:** [← 04](04-model-registry-governance.md) · **Next:** [06 · Model Serving Architecture →](06-model-serving-architecture.md)
