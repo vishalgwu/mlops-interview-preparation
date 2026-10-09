@@ -2,6 +2,17 @@
 
 > **Goal:** a field manual for the incidents that actually page you: memory leaks, OOMs, cold starts, deadlocks, feature inconsistency — and how to degrade gracefully.
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 11](assets/tree_11_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 11](assets/tree_11_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [Incident triage framework](#1-incident-triage-framework)
 2. [Memory leaks](#2-memory-leaks)
@@ -345,6 +356,58 @@ Other degradations: **load shedding** (reject low-priority traffic with 429 when
 **Q8. What do you do in the first 10 minutes of a model-quality incident?**
 - ❌ *Trap:* "Start debugging the model."
 - ✅ *Staff:* Mitigate before diagnosing: roll back to the previous version or flip to the fallback via kill switch if user impact is confirmed; announce the incident; then ask "what changed" (deploy, model alias, data feed, traffic) using dashboards with deploy annotations; check feature null/freshness and drift; preserve evidence (logs, shadow samples). Root cause analysis follows once impact is contained.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Mitigate first, diagnose second, prevent third.
+2. Use py-spy dump on a hung pod before restarting it.
+3. Set timeouts on every external call and bound every queue.
+4. Recycle workers with max-requests plus jitter as a leak stopgap.
+5. Test fallback tiers continuously; they are the code that has never run when needed.
+6. Flag degraded predictions and exclude them from retraining data.
+
+## Worked Scenario: Requests hang, CPU at 2%
+
+**Situation.** Pods look healthy but clients time out.
+
+**Steps**
+
+1. py-spy dump to find the common wait site.
+2. Check pool sizes and timeouts for the feature store client.
+3. Check for sync calls in async handlers.
+4. Add a bulkhead and a liveness that exercises the request path.
+
+**Outcome.** Exhausted connection pool without timeout; fixed with deadlines, bounded pools and load shedding.
+
+## More Interview Questions
+
+**Q9. Memory grows 100 MB/hour?**
+- ❌ *Trap:* Raise the limit.
+- ✅ *Staff:* Confirm leak vs load, recycle workers, tracemalloc diff, memray, check caches, tensors with grad, label cardinality, malloc arenas.
+
+**Q10. CUDA OOM only in prod?**
+- ❌ *Trap:* Smaller GPUs.
+- ✅ *Staff:* Variable shapes, concurrency and allocator fragmentation; bound shapes, expandable segments, split-and-retry.
+
+**Q11. Retry storm?**
+- ❌ *Trap:* More replicas.
+- ✅ *Staff:* Retry budgets, backoff with jitter, circuit breakers, load shedding with 429; avoid double retries at client and mesh.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | [02 Data & Features](02-data-engineering-feature-stores.md) | skew incidents |
+| ⬆ Fed by | [07 Deployment](07-deployment-strategies-traffic-routing.md) | rollback |
+| ⬆ Fed by | [09 Infra & K8s](09-infrastructure-containerization-orchestration.md) | OOM, cold start |
+| ⬇ Feeds | [12 Interview Kit](12-mlops-interview-cheatsheet-system-design.md) | interview stories |
+
+![Connections](assets/tree_11_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Prev:** [← 10](10-security-privacy-compliance.md) · **Next:** [12 · Interview Cheatsheet & System Design →](12-mlops-interview-cheatsheet-system-design.md)

@@ -2,6 +2,17 @@
 
 > **Goal:** make every model reproducible and comparable: *which code, data, parameters and environment produced which metric and artifact?*
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 3](assets/tree_03_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 3](assets/tree_03_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [What must be tracked](#1-what-must-be-tracked)
 2. [MLflow tracking at scale](#2-mlflow-tracking-at-scale)
@@ -298,6 +309,57 @@ def seed_everything(seed: int = 42, deterministic: bool = True):
 **Q8. How do you store and compare very large model artifacts (10+ GB)?**
 - ❌ *Trap:* "Log them every epoch to MLflow."
 - ✅ *Staff:* Keep checkpoints in object storage with lifecycle rules (keep best-N + final), log URIs and checksums, use multipart upload, and store only the final/best model as a registry artifact. For comparisons rely on metrics/eval reports, not downloading weights. Consider deltas/LoRA adapters instead of full-model copies.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Block registration when git.dirty is True; unreproducible champions are the most expensive bug.
+2. Log every N steps, not every step; tracking-server bloat is a real outage cause.
+3. Compare models across several seeds with confidence intervals, never single points.
+4. Select on validation, touch the test set once, and say so out loud in interviews.
+5. Log pip freeze and image digest with every run.
+6. Use parent/child runs for sweeps; only the parent holds summary metrics.
+
+## Worked Scenario: The best run cannot be reproduced
+
+**Situation.** The champion AUC was 0.91 but re-running gives 0.89. Nobody remembers which notebook cell ran.
+
+**Steps**
+
+1. Check tags: git sha, dirty flag, data hash.
+2. Rebuild env from the logged requirements and image digest.
+3. Re-run with 5 seeds to measure variance.
+4. Decide: noise (document it) or real drift in code/data (fix and re-register).
+
+**Outcome.** Variance was ~0.01; the team now gates on CI-reported means with intervals.
+
+## More Interview Questions
+
+**Q9. Experiment tracking vs registry?**
+- ❌ *Trap:* Same thing.
+- ✅ *Staff:* Tracking is the append-only log of every attempt; the registry is the governed list of deployable candidates with approval state.
+
+**Q10. 5,000 trials crush the tracking server. Fix?**
+- ❌ *Trap:* Bigger DB.
+- ✅ *Staff:* Batch/log less often, summary-only parents, early-stopping sweeps, Postgres tuning and retention, horizontally scale the stateless server.
+
+**Q11. Why DVC over Git LFS?**
+- ❌ *Trap:* It is open source.
+- ✅ *Staff:* Pipeline DAG with caching, params/metrics diffs, experiments, and any object-store remote.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | [01 Foundations](01-mlops-foundations-system-design.md) | reproducibility |
+| ⬆ Fed by | [02 Data & Features](02-data-engineering-feature-stores.md) | versioned data |
+| ⬇ Feeds | [04 Registry](04-model-registry-governance.md) | runs become versions |
+
+![Connections](assets/tree_03_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Prev:** [← 02](02-data-engineering-feature-stores.md) · **Next:** [04 · Model Registry & Governance →](04-model-registry-governance.md)

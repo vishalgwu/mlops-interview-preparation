@@ -2,6 +2,17 @@
 
 > **Goal:** a high-density review sheet and a repeatable framework for senior/staff MLOps interviews.
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 12](assets/tree_12_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 12](assets/tree_12_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [How to run a system-design interview](#1-how-to-run-a-system-design-interview)
 2. [Trade-off frameworks](#2-architectural-trade-off-frameworks)
@@ -234,6 +245,56 @@ Orchestrator (Airflow/Argo) → validate features partition → Spark/Ray scorin
 - [ ] Cover day-2: monitoring, rollback, ownership, cost, security.
 
 **Anti-patterns to avoid**: tool-name dropping without reasons, designing for scale you don't have, ignoring labels/feedback, no failure story, no rollback plan.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Clarify requirements and the success metric before drawing any box.
+2. Do back-of-envelope math (QPS, storage, GPU count) out loud.
+3. State the trade-off, your pick, and what would change your mind.
+4. Always cover day-2: monitoring, rollback, ownership, cost, security.
+5. Prepare four stories: drift incident, rollout, cost cut, reproducibility fix.
+6. Know a GBDT is often the right answer; justify complexity increases.
+
+## Worked Scenario: 45-minute fraud system design
+
+**Situation.** Design real-time fraud detection at 5k QPS and p99 under 100 ms.
+
+**Steps**
+
+1. Requirements and metrics (precision at FPR, latency, availability).
+2. Data and features: streaming velocity features, online store, PIT training.
+3. Serve: GBDT on CPU, rules fallback, shadow then canary.
+4. Operate: delayed labels, drift, exploration slice, retrain triggers.
+
+**Outcome.** A structured answer that covers failure modes and ownership scores higher than a bigger model.
+
+## More Interview Questions
+
+**Q9. What would you build first for a new ML team?**
+- ❌ *Trap:* A platform.
+- ✅ *Staff:* A reproducible pipeline, registry with an eval gate, serving template and monitoring; platform only when scale demands.
+
+**Q10. Champion/challenger shows no difference?**
+- ❌ *Trap:* Bigger model.
+- ✅ *Staff:* Check power, metric sensitivity, exposure dilution; a null result is information.
+
+**Q11. Latency SLO 50 ms but model takes 80 ms?**
+- ❌ *Trap:* Scale out.
+- ✅ *Staff:* Distill, quantise, compile, precompute, cache, cascade, or renegotiate the SLO with data.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | [11 Failures](11-production-failures-troubleshooting.md) | interview stories |
+| ⬇ Feeds | none | end of the chain |
+
+![Connections](assets/tree_12_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Prev:** [← 11](11-production-failures-troubleshooting.md) · **Home:** [README](README.md)

@@ -2,6 +2,17 @@
 
 > **Goal:** pick and build the right inference pattern (real-time, batch, streaming) and serve it with predictable latency, throughput and cost.
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 6](assets/tree_06_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 6](assets/tree_06_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [Serving patterns compared](#1-serving-patterns-compared)
 2. [FastAPI real-time service](#2-fastapi-real-time-service)
@@ -357,6 +368,59 @@ flowchart LR
 **Q8. Preprocessing: inside the model graph or in the service?**
 - ❌ *Trap:* "Doesn't matter."
 - ✅ *Staff:* Anything affecting numerics should travel with the model (sklearn Pipeline, ONNX graph, Triton ensemble) to avoid skew and version mismatch. Business/IO logic (auth, feature fetch, rules) belongs in the service layer. Version them together; log both preprocessed and raw inputs for debugging.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Load and warm up the model at startup; mark ready only after warm-up.
+2. Never run CPU-bound inference directly in an async handler.
+3. Log predictions asynchronously; the request path must not wait on Kafka.
+4. Tune dynamic-batching delay to a fraction of the latency budget, then measure p99.
+5. Return buckets or labels externally when extraction is a concern.
+6. Write batch outputs to a temp path and commit atomically.
+
+## Worked Scenario: p99 is 2s while p50 is 40 ms
+
+**Situation.** A FastAPI model service has a heavy tail only at peak.
+
+**Steps**
+
+1. Check CPU throttling and thread oversubscription.
+2. Add per-stage histograms (features, predict, serialize).
+3. Look for sync work blocking the event loop.
+4. Add per-stage timeouts and a fallback; then re-measure.
+
+**Outcome.** Cause was a sync feature-store client without a timeout; fixed with deadlines and a circuit breaker.
+
+## More Interview Questions
+
+**Q9. Batch, online or streaming?**
+- ❌ *Trap:* Real-time is better.
+- ✅ *Staff:* Derive from decision latency, feature freshness and cost; precompute when the entity set is bounded; hybrids are common.
+
+**Q10. Why Triton?**
+- ❌ *Trap:* NVIDIA is faster.
+- ✅ *Staff:* Dynamic batching, concurrent instances, ensembles and optimised backends raise GPU utilisation per dollar.
+
+**Q11. Exactly-once scoring?**
+- ❌ *Trap:* Kafka gives it.
+- ✅ *Staff:* Practically at-least-once with idempotent sinks keyed by event id; commit offsets after output is durable.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | builds images |
+| ⬆ Fed by | [09 Infra & K8s](09-infrastructure-containerization-orchestration.md) | hosts serving |
+| ⬆ Fed by | [10 Security](10-security-privacy-compliance.md) | endpoint hardening |
+| ⬇ Feeds | [07 Deployment](07-deployment-strategies-traffic-routing.md) | versions to route |
+| ⬇ Feeds | [08 Monitoring](08-monitoring-observability-alerting.md) | metrics + logs |
+
+![Connections](assets/tree_06_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Prev:** [← 05](05-cicd-ct-automation-pipelines.md) · **Next:** [07 · Deployment Strategies →](07-deployment-strategies-traffic-routing.md)

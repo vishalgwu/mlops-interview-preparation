@@ -2,6 +2,17 @@
 
 > **Goal:** a single, auditable source of truth for which model version is allowed where, who approved it, and what it was trained on.
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 4](assets/tree_04_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 4](assets/tree_04_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [Registry concepts](#1-registry-concepts)
 2. [Stages vs aliases (MLflow)](#2-stages-vs-aliases-mlflow)
@@ -260,6 +271,57 @@ def audited_set_alias(client, name, alias, version, reason: str, ticket: str):
 **Q8. How do you prove which model scored a particular customer 8 months ago?**
 - ❌ *Trap:* "Check what's in production today."
 - ✅ *Staff:* The prediction log stores `model_name`, `model_version`, request id and feature snapshot (or reference). The registry retains that version immutably, with its run lineage to data/code. For regulated flows, logs are written to WORM storage with retention matching regulation.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Prefer aliases over stages; multiple environments and shadow variants need named pointers.
+2. Resolve the alias to an immutable version in CI and record it in the manifest.
+3. Package preprocessing inside the model so version equals full function.
+4. Make approval a machine-enforced control (protected environment), not a Slack message.
+5. Emit an audit event on every alias move: actor, from, to, reason, ticket.
+6. Keep the previous version loadable; rollback time should be a tracked SLO.
+
+## Worked Scenario: 3 AM rollback
+
+**Situation.** A new champion drops approval rate by 12% overnight.
+
+**Steps**
+
+1. Move the traffic weight to 0 or re-point the alias to the previous version.
+2. Confirm via the model_version metric that pods run the old version.
+3. Open an incident; preserve shadow logs.
+4. Backfill a regression test that would have caught it.
+
+**Outcome.** Rollback in under five minutes because the previous version, manifest and runbook already existed.
+
+## More Interview Questions
+
+**Q9. Should serving auto-follow the champion alias?**
+- ❌ *Trap:* Yes, simplest.
+- ✅ *Staff:* Only with caching and last-known-good; otherwise registry changes become unreviewed prod changes. Pin versions via GitOps.
+
+**Q10. How do you prove which model scored a customer 8 months ago?**
+- ❌ *Trap:* Check production.
+- ✅ *Staff:* Prediction log holds model name, version, request id and feature snapshot; registry retains the immutable version with lineage.
+
+**Q11. Handle a high-risk (credit) model?**
+- ❌ *Trap:* Same pipeline plus logging.
+- ✅ *Staff:* Risk tier tag drives mandatory gates: independent validation, bias testing, explainability artifacts, longer retention, periodic revalidation.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | [03 Experiments](03-experiment-tracking-model-versioning.md) | runs become versions |
+| ⬇ Feeds | [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | gates + promotion |
+| ⬇ Feeds | [10 Security](10-security-privacy-compliance.md) | RBAC + approvals |
+
+![Connections](assets/tree_04_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Prev:** [← 03](03-experiment-tracking-model-versioning.md) · **Next:** [05 · CI/CD/CT Automation →](05-cicd-ct-automation-pipelines.md)

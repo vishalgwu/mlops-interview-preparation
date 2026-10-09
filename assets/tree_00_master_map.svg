@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 720" width="1500" height="720" role="img" aria-label="Master interconnection tree of the 12 modules" font-family="'Segoe UI',Helvetica,Arial,sans-serif">
+<title>MLOps course: master interconnection tree</title>
+<rect width="1500" height="720" rx="16" fill="#f3f2fb"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e0368c"/></marker></defs>
+<rect x="546.3" y="32.0" width="407.4" height="36.0" rx="18.0" fill="#1f1b5a"/><text x="750.0" y="55.6" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">MLOps: how the 12 modules connect</text>
+<path d="M750.0 68.0 V95 H99.16666666666666 V122" stroke="#aaa8c8" stroke-width="1.4" fill="none"/>
+<rect x="38.9" y="123.5" width="120.6" height="33.0" rx="16.5" fill="#2d2a6e"/><text x="99.16666666666666" y="144.6" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Foundation</text>
+<path d="M99.16666666666666 156.5 V200 H99.16666666666666 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M750.0 68.0 V95 H335.8333333333333 V122" stroke="#aaa8c8" stroke-width="1.4" fill="none"/>
+<rect x="243.3" y="123.5" width="185.1" height="33.0" rx="16.5" fill="#2d2a6e"/><text x="335.8333333333333" y="144.6" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Data &amp; Experiments</text>
+<path d="M335.8333333333333 156.5 V200 H217.5 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M335.8333333333333 156.5 V200 H335.8333333333333 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M335.8333333333333 156.5 V200 H454.16666666666663 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M750.0 68.0 V95 H631.6666666666666 V122" stroke="#aaa8c8" stroke-width="1.4" fill="none"/>
+<rect x="527.0" y="123.5" width="209.3" height="33.0" rx="16.5" fill="#2d2a6e"/><text x="631.6666666666666" y="144.6" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Automation &amp; Delivery</text>
+<path d="M631.6666666666666 156.5 V200 H572.5 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M631.6666666666666 156.5 V200 H690.8333333333333 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M750.0 68.0 V95 H927.5 V122" stroke="#aaa8c8" stroke-width="1.4" fill="none"/>
+<rect x="835.0" y="123.5" width="185.1" height="33.0" rx="16.5" fill="#2d2a6e"/><text x="927.5" y="144.6" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Serving &amp; Platform</text>
+<path d="M927.5 156.5 V200 H809.1666666666666 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M927.5 156.5 V200 H927.5 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M927.5 156.5 V200 H1045.8333333333333 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M750.0 68.0 V95 H1223.3333333333333 V122" stroke="#aaa8c8" stroke-width="1.4" fill="none"/>
+<rect x="1175.1" y="123.5" width="96.4" height="33.0" rx="16.5" fill="#2d2a6e"/><text x="1223.3333333333333" y="144.6" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Operate</text>
+<path d="M1223.3333333333333 156.5 V200 H1164.1666666666665 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M1223.3333333333333 156.5 V200 H1282.5 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M750.0 68.0 V95 H1400.8333333333333 V122" stroke="#aaa8c8" stroke-width="1.4" fill="none"/>
+<rect x="1344.6" y="123.5" width="112.5" height="33.0" rx="16.5" fill="#2d2a6e"/><text x="1400.8333333333333" y="144.6" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Interview</text>
+<path d="M1400.8333333333333 156.5 V200 H1400.8333333333333 V224" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="51.7" y="227.0" width="95.0" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="99.16666666666666" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">01</text><text x="99.16666666666666" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Foundations</text>
+<rect x="156.3" y="227.0" width="122.3" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="217.5" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">02</text><text x="217.5" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Data &amp; Features</text>
+<rect x="288.3" y="227.0" width="95.0" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="335.8333333333333" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">03</text><text x="335.8333333333333" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Experiments</text>
+<rect x="416.9" y="227.0" width="74.6" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="454.16666666666663" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">04</text><text x="454.16666666666663" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Registry</text>
+<rect x="535.2" y="227.0" width="74.6" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="572.5" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">05</text><text x="572.5" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">CI/CD/CT</text>
+<rect x="646.7" y="227.0" width="88.2" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="690.8333333333333" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">07</text><text x="690.8333333333333" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Deployment</text>
+<rect x="775.3" y="227.0" width="67.7" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="809.1666666666666" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">06</text><text x="809.1666666666666" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Serving</text>
+<rect x="880.0" y="227.0" width="95.0" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="927.5" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">09</text><text x="927.5" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Infra &amp; K8s</text>
+<rect x="1008.6" y="227.0" width="74.6" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="1045.8333333333333" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">10</text><text x="1045.8333333333333" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Security</text>
+<rect x="1120.1" y="227.0" width="88.2" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="1164.1666666666665" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">08</text><text x="1164.1666666666665" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Monitoring</text>
+<rect x="1245.2" y="227.0" width="74.6" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="1282.5" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">11</text><text x="1282.5" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Failures</text>
+<rect x="1346.5" y="227.0" width="108.7" height="46.0" rx="23.0" fill="#1f1b5a"/><text x="1400.8333333333333" y="246.3" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">12</text><text x="1400.8333333333333" y="261.4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Interview Kit</text>
+<path d="M99.2 276 C99.2 361.0 217.5 361.0 217.5 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M99.2 276 C99.2 405.9 335.8 405.9 335.8 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M99.2 276 C99.2 495.9 572.5 495.9 572.5 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M99.2 276 C99.2 720.7 1164.2 720.7 1164.2 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M217.5 276 C217.5 361.0 335.8 361.0 335.8 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M217.5 276 C217.5 675.7 1164.2 675.7 1164.2 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M217.5 276 C217.5 720.7 1282.5 720.7 1282.5 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M335.8 276 C335.8 361.0 454.2 361.0 454.2 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M454.2 276 C454.2 361.0 572.5 361.0 572.5 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M454.2 276 C454.2 540.8 1045.8 540.8 1045.8 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M572.5 276 C572.5 405.9 809.2 405.9 809.2 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M572.5 276 C572.5 361.0 690.8 361.0 690.8 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M1164.2 276 C1164.2 540.8 572.5 540.8 572.5 280" stroke="#e0368c" stroke-width="2.6" fill="none" opacity="1" marker-end="url(#a)"/>
+<path d="M809.2 276 C809.2 361.0 690.8 361.0 690.8 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M809.2 276 C809.2 450.9 1164.2 450.9 1164.2 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M927.5 276 C927.5 361.0 809.2 361.0 809.2 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M690.8 276 C690.8 495.9 1164.2 495.9 1164.2 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M690.8 276 C690.8 540.8 1282.5 540.8 1282.5 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M927.5 276 C927.5 450.9 1282.5 450.9 1282.5 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M1045.8 276 C1045.8 405.9 809.2 405.9 809.2 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M1045.8 276 C1045.8 361.0 927.5 361.0 927.5 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<path d="M1282.5 276 C1282.5 361.0 1400.8 361.0 1400.8 280" stroke="#6a67b0" stroke-width="1.3" fill="none" opacity="0.55" marker-end="url(#a)"/>
+<text x="750.0" y="660" text-anchor="middle" fill="#1b1a3a" font-size="13" font-weight="700">Arcs = "feeds into". Bold pink arc = the continuous-training loop (Monitoring 08 triggers CI/CD/CT 05).</text>
+<text x="750.0" y="684" text-anchor="middle" fill="#5b5a80" font-size="12">Data (02) → Experiments (03) → Registry (04) → CI/CD/CT (05) → Serving (06) / Deployment (07) → Monitoring (08) → retrain.  Security (10), Infra (09) and Failures (11) cut across.</text>
+</svg>

@@ -2,6 +2,17 @@
 
 > **Goal:** automate testing, delivery and *continuous training* so a code change, a data change or a drift signal all lead to a safe, gated, auditable release.
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 5](assets/tree_05_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 5](assets/tree_05_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [CI vs CD vs CT](#1-ci-vs-cd-vs-ct)
 2. [What to test in ML](#2-what-to-test-in-ml)
@@ -319,6 +330,59 @@ compiler.Compiler().compile(pipeline, "fraud_ct.yaml")
 **Q8. What metrics do you track for the delivery process itself?**
 - ❌ *Trap:* "Number of deployments."
 - ✅ *Staff:* DORA-style metrics adapted to ML: lead time from data/code change to production model, deployment frequency, change-failure rate (rollbacks/incidents), MTTR (time to rollback), plus CT-specific: pipeline success rate, time-to-retrain after drift alert, % retrains auto-promoted vs rejected by gates.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Run the full retrain on a schedule, not on every PR; smoke-train on a sample in CI.
+2. Debounce drift alerts and add a cooldown to avoid retrain storms.
+3. Pin images by digest, sign them, and verify at admission.
+4. Test behaviour: invariance and directional tests catch bugs unit tests cannot.
+5. Record pipeline git sha and image digest in model version tags.
+6. Gate retrain promotion against champion on a frozen set AND a recent slice.
+
+## Worked Scenario: Retrain storm
+
+**Situation.** A flapping drift alert launches 40 retraining workflows overnight.
+
+**Steps**
+
+1. Set concurrencyPolicy: Forbid on the CronWorkflow.
+2. Add a debounce window in Alertmanager and a cooldown after each retrain.
+3. Cap budget per day.
+4. Alert on retrain frequency itself.
+
+**Outcome.** One retrain per cooldown window; the cluster bill and registry noise disappear.
+
+## More Interview Questions
+
+**Q9. When should retraining be automatic?**
+- ❌ *Trap:* Always.
+- ✅ *Staff:* Tier by blast radius: low risk auto-promotes after gates and canary; high risk stops at a registered challenger for review.
+
+**Q10. CI passes, canary fails. Why?**
+- ❌ *Trap:* Canary is flaky.
+- ✅ *Staff:* Offline sets miss skew, freshness and traffic mix. Roll back, replay shadow logs, add the case to the offline suite.
+
+**Q11. How do you stop poisoned data entering CT?**
+- ❌ *Trap:* Trust the data team.
+- ✅ *Staff:* Validate first, train on snapshots, compare to champion on a golden set, keep N snapshots to bisect.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | [01 Foundations](01-mlops-foundations-system-design.md) | maturity levels |
+| ⬆ Fed by | [04 Registry](04-model-registry-governance.md) | gates + promotion |
+| ⬆ Fed by | [08 Monitoring](08-monitoring-observability-alerting.md) | retrain trigger |
+| ⬇ Feeds | [06 Serving](06-model-serving-architecture.md) | builds images |
+| ⬇ Feeds | [07 Deployment](07-deployment-strategies-traffic-routing.md) | progressive delivery |
+
+![Connections](assets/tree_05_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Prev:** [← 04](04-model-registry-governance.md) · **Next:** [06 · Model Serving Architecture →](06-model-serving-architecture.md)

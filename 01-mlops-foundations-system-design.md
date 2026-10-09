@@ -2,6 +2,17 @@
 
 > **Goal:** understand *why* ML systems fail in production differently from ordinary software, and be able to design the lifecycle, spot technical debt, and place any team on a maturity ladder.
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 1](assets/tree_01_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 1](assets/tree_01_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [First principles: three lifecycles](#1-first-principles-three-lifecycles)
 2. [Anatomy of a production ML system](#2-anatomy-of-a-production-ml-system)
@@ -271,6 +282,59 @@ Run: `dvc repro` — only stages with changed deps/params re-execute.
 **Q8. Define the maturity-level jump from 1 to 2 in terms of outcomes.**
 - ❌ *Trap:* "Level 2 is when you use GitHub Actions."
 - ✅ *Staff:* Level 1 automates *running* the pipeline; Level 2 automates *changing* it. Pipeline code is tested (unit tests on components, data contract tests, integration run on a sample), built into versioned images, promoted dev→staging→prod, and a retrained model goes through automated gates and progressive delivery. Outcome metrics: lead time for pipeline changes, change-failure rate, MTTR for bad models.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Draw the lifecycle (code, data, model) on a whiteboard before touching any tool; interviewers watch for it.
+2. Say 'three artifacts, three clocks' early: it signals you understand why ML breaks differently from software.
+3. Quote maturity levels as outcomes (lead time, change-failure rate), not tool names.
+4. Always name the feedback loop in a recommender or lending design, then name its mitigation.
+5. Keep a one-line post-mortem template in memory: impact, timeline, detection gap, root cause, fix, prevention.
+6. When asked 'should we build a platform?', answer with cost of platform versus cost of ad-hoc process.
+
+## Worked Scenario: Notebook-to-prod takes 3 months
+
+**Situation.** A churn model lives in one notebook. Retrains need a data scientist's laptop and a hand-off email.
+
+**Steps**
+
+1. Measure the lead-time breakdown (data pull, training, review, deploy).
+2. Containerize the env and create a single `train` entrypoint driven by params.yaml.
+3. Add DVC for data, MLflow for runs, and an eval gate before registering.
+4. Add a serving template and a drift alert; stop there until pain justifies Level 2.
+
+**Outcome.** Lead time drops from months to days; retraining becomes a command, not a project.
+
+## More Interview Questions
+
+**Q9. Why can't a team just 'do DevOps' for ML?**
+- ❌ *Trap:* ML is just another service, so CI/CD is enough.
+- ✅ *Staff:* The deployable behaviour depends on data and training too. Add data validation, lineage, eval gating and drift monitoring on top of CI/CD.
+
+**Q10. How do you spot entanglement debt?**
+- ❌ *Trap:* Look for messy code.
+- ✅ *Staff:* Ablate or perturb one feature and watch unrelated predictions shift (CACE); track per-feature importance stability and keep features modular.
+
+**Q11. Give a Level 2 success metric.**
+- ❌ *Trap:* Number of pipelines.
+- ✅ *Staff:* Lead time for pipeline changes, change-failure rate, MTTR for a bad model, and percent of retrains promoted automatically vs rejected by gates.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | none | entry point of the course |
+| ⬇ Feeds | [02 Data & Features](02-data-engineering-feature-stores.md) | data lifecycle |
+| ⬇ Feeds | [03 Experiments](03-experiment-tracking-model-versioning.md) | reproducibility |
+| ⬇ Feeds | [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | maturity levels |
+| ⬇ Feeds | [08 Monitoring](08-monitoring-observability-alerting.md) | feedback loops |
+
+![Connections](assets/tree_01_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Next:** [02 · Data Engineering & Feature Stores →](02-data-engineering-feature-stores.md)

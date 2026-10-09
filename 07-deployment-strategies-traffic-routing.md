@@ -2,6 +2,17 @@
 
 > **Goal:** release new models with bounded risk: measure before exposing, expose gradually, and roll back in seconds.
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 7](assets/tree_07_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 7](assets/tree_07_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [Strategy comparison](#1-strategy-comparison)
 2. [Blue/Green](#2-bluegreen)
@@ -300,6 +311,58 @@ Failure of any analysis → automatic abort and rollback to stable.
 **Q8. Design rollback for a model whose new version needs a new feature.**
 - ❌ *Trap:* "Just redeploy the old image."
 - ✅ *Staff:* Make feature changes additive (expand/contract). Publish the new feature while v-old ignores it. Roll out the new model; during rollback the old model still works because its inputs are untouched. Remove old features only after the bake period and when no version depends on them. Feature versioning in the store (`user_stats_v2`) enforces this.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Canary answers 'is it safe', A/B answers 'is it better'; do not mix the two.
+2. Use sticky assignment so a user never flips between model versions.
+3. Run shadow with credentials that cannot write; mirrored traffic must be side-effect free.
+4. Add model-level metrics to the canary analysis (score PSI, fallback rate, decision rate).
+5. Keep the old environment alive through the bake period.
+6. Make feature changes additive (expand/contract) so rollback always works.
+
+## Worked Scenario: Shadow shows 8% decision flips
+
+**Situation.** The challenger disagrees with the champion on 8% of traffic.
+
+**Steps**
+
+1. Segment flips by feature and slice.
+2. Review samples with a domain expert.
+3. Compare to labels where available.
+4. Decide using a pre-agreed expected flip band.
+
+**Outcome.** Flips concentrated in one region due to a skewed feature path; fixed before canary.
+
+## More Interview Questions
+
+**Q9. Peeking at A/B results daily?**
+- ❌ *Trap:* Stop when p<0.05.
+- ✅ *Staff:* Peeking inflates false positives; use the fixed horizon or sequential methods and check SRM first.
+
+**Q10. Rollback with a new feature?**
+- ❌ *Trap:* Redeploy old image.
+- ✅ *Staff:* Additive feature schema; the old model ignores the new feature; remove only after bake.
+
+**Q11. Blue/green downside?**
+- ❌ *Trap:* None.
+- ✅ *Staff:* 100% exposure after only a smoke test, double GPU cost, cold caches; combine with shadow first.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | progressive delivery |
+| ⬆ Fed by | [06 Serving](06-model-serving-architecture.md) | versions to route |
+| ⬇ Feeds | [08 Monitoring](08-monitoring-observability-alerting.md) | canary analysis |
+| ⬇ Feeds | [11 Failures](11-production-failures-troubleshooting.md) | rollback |
+
+![Connections](assets/tree_07_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Prev:** [← 06](06-model-serving-architecture.md) · **Next:** [08 · Monitoring & Observability →](08-monitoring-observability-alerting.md)

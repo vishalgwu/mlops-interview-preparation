@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 975 760" width="975" height="760" role="img" aria-label="Decision tree for module 12" font-family="'Segoe UI',Helvetica,Arial,sans-serif">
+<title>Module 12 decision tree: What is the interviewer asking?</title>
+<rect width="975" height="760" rx="16" fill="#f3f2fb"/>
+<rect x="319.0" y="20.0" width="337.1" height="52.0" rx="26.0" fill="#1f1b5a"/><text x="487.5" y="41.9" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Module 12 · Interview Kit</text><text x="487.5" y="59.9" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">What is the interviewer asking?</text>
+<text x="24" y="30" fill="#5b5a80" font-size="11">Navy oval = decision · pink check = yes · dark cross = no · plain text = what to use, and when</text>
+<path d="M487.5 72.0 V120 H300 V126" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="221.0" y="134.2" width="158.1" height="31.5" rx="15.8" fill="#1f1b5a"/><text x="300" y="154.0" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">Design a system?</text>
+<path d="M290 165.75 L225 201" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M310 165.75 L375 201" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="225" cy="210" r="9" fill="#e0368c"/><path d="M221 210 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="375" cy="210" r="9" fill="#2d2a6e"/><path d="M371.5 206.5 l7 7 M378.5 206.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="55" y="250" fill="#1b1a3a" font-size="13" font-weight="700">R-A-D-I-O-M</text><text x="55" y="267" fill="#5b5a80" font-size="11">• requirements, assumptions, data</text><text x="55" y="282" fill="#5b5a80" font-size="11">• infra: train + serve</text><text x="55" y="297" fill="#5b5a80" font-size="11">• operate, milestones, trade-offs</text>
+<path d="M379 218 L415 269.25" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="346.0" y="261.5" width="158.1" height="47.0" rx="23.5" fill="#1f1b5a"/><text x="425" y="281.3" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">Compare tools or</text><text x="425" y="296.8" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">patterns?</text>
+<path d="M415 308.5 L350 336" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M435 308.5 L500 336" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="350" cy="345" r="9" fill="#e0368c"/><path d="M346 345 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="500" cy="345" r="9" fill="#2d2a6e"/><path d="M496.5 341.5 l7 7 M503.5 341.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="180" y="385" fill="#1b1a3a" font-size="13" font-weight="700">Trade-off axes</text><text x="180" y="402" fill="#5b5a80" font-size="11">• latency, cost, freshness</text><text x="180" y="417" fill="#5b5a80" font-size="11">• quality, risk</text><text x="180" y="432" fill="#5b5a80" font-size="11">• say what you sacrifice</text>
+<path d="M504 353 L540 396.5" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="449.6" y="404.2" width="200.9" height="31.5" rx="15.8" fill="#1f1b5a"/><text x="550" y="424.0" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">An incident or outage?</text>
+<path d="M540 435.75 L475 471" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M560 435.75 L625 471" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="475" cy="480" r="9" fill="#e0368c"/><path d="M471 480 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="625" cy="480" r="9" fill="#2d2a6e"/><path d="M621.5 476.5 l7 7 M628.5 476.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="305" y="520" fill="#1b1a3a" font-size="13" font-weight="700">Mitigate first</text><text x="305" y="537" fill="#5b5a80" font-size="11">• rollback or fallback</text><text x="305" y="552" fill="#5b5a80" font-size="11">• what changed?</text><text x="305" y="567" fill="#5b5a80" font-size="11">• detection + prevention gap</text>
+<path d="M629 488 L665 539.25" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="574.6" y="539.2" width="200.9" height="31.5" rx="15.8" fill="#1f1b5a"/><text x="675" y="559.0" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">How do you measure it?</text>
+<path d="M665 570.75 L600 606" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M685 570.75 L750 606" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="600" cy="615" r="9" fill="#e0368c"/><path d="M596 615 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="750" cy="615" r="9" fill="#2d2a6e"/><path d="M746.5 611.5 l7 7 M753.5 611.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="430" y="655" fill="#1b1a3a" font-size="13" font-weight="700">Layered metrics</text><text x="430" y="672" fill="#5b5a80" font-size="11">• infra, service, drift</text><text x="430" y="687" fill="#5b5a80" font-size="11">• delayed labels + proxies</text><text x="430" y="702" fill="#5b5a80" font-size="11">• business KPI + slices</text>
+<text x="710" y="655" fill="#1b1a3a" font-size="13" font-weight="700">Rapid-fire</text><text x="710" y="672" fill="#5b5a80" font-size="11">• one crisp sentence</text><text x="710" y="687" fill="#5b5a80" font-size="11">• then one trade-off</text><text x="710" y="702" fill="#5b5a80" font-size="11">• offer depth, don't dump</text>
+<text x="24" y="738" fill="#5b5a80" font-size="11" font-style="italic">Details, code and interview Q&amp;A: 12-mlops-interview-cheatsheet-system-design.md</text>
+</svg>

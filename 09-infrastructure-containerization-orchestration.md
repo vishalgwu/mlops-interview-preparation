@@ -2,6 +2,17 @@
 
 > **Goal:** package models into small, reproducible, secure images and run them on Kubernetes with correct resource, scaling and networking behaviour; scale compute with Ray and Spark.
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 9](assets/tree_09_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 9](assets/tree_09_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [Containerizing ML models](#1-containerizing-ml-models)
 2. [Kubernetes core objects for ML serving](#2-kubernetes-core-objects-for-ml-serving)
@@ -378,6 +389,57 @@ minikube image load fraud-api:dev && kubectl apply -f deploy/k8s/ && kubectl -n 
 **Q8. A rolling update causes a burst of 502s. Why?**
 - ❌ *Trap:* "The new version has bugs."
 - ✅ *Staff:* Typically lifecycle: old pods removed from endpoints while still receiving traffic (no preStop delay), new pods marked ready before warm-up, or `maxUnavailable>0` with insufficient capacity. Fix with preStop sleep + graceful shutdown, accurate readiness, `maxUnavailable: 0`, PDB, and connection draining on the ingress.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Use multi-stage builds, non-root users, digest pins and a .dockerignore.
+2. Set OMP_NUM_THREADS per worker to avoid CPU oversubscription.
+3. Set memory limits from measured peak; be careful with CPU limits on latency paths.
+4. Use startup probes for slow model loads and keep liveness cheap.
+5. Scale GPU services on queue depth, not CPU.
+6. Add a preStop sleep and PDB so rollouts do not drop requests.
+
+## Worked Scenario: OOMKilled only under load
+
+**Situation.** Pods restart every few hours at peak.
+
+**Steps**
+
+1. Plot working set versus RPS to separate leak from burst.
+2. Count workers times model size.
+3. Bound batch and queue sizes.
+4. Set limit to 1.3x measured peak and alert at 80%.
+
+**Outcome.** Eight workers each held a model copy; dropped to three workers plus mmap.
+
+## More Interview Questions
+
+**Q9. Bake the model into the image?**
+- ❌ *Trap:* Always.
+- ✅ *Staff:* Small models yes; large ones via init container or cache keyed by checksum; both pinned.
+
+**Q10. Why avoid CPU limits?**
+- ❌ *Trap:* Limits are safer.
+- ✅ *Staff:* CFS throttling inflates p99 for bursty multithreaded inference; use requests, keep memory limits, watch throttling metrics.
+
+**Q11. Ray or Spark?**
+- ❌ *Trap:* Ray is newer.
+- ✅ *Staff:* Spark for TB-scale relational ETL; Ray for GPU actors, HPO and model composition.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | [10 Security](10-security-privacy-compliance.md) | pod + supply-chain security |
+| ⬇ Feeds | [06 Serving](06-model-serving-architecture.md) | hosts serving |
+| ⬇ Feeds | [11 Failures](11-production-failures-troubleshooting.md) | OOM, cold start |
+
+![Connections](assets/tree_09_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Prev:** [← 08](08-monitoring-observability-alerting.md) · **Next:** [10 · Security, Privacy & Compliance →](10-security-privacy-compliance.md)

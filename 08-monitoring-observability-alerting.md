@@ -2,6 +2,17 @@
 
 > **Goal:** know when the system *and the model* are unhealthy before users or the business tell you.
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 8](assets/tree_08_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 8](assets/tree_08_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [Four layers of ML monitoring](#1-four-layers-of-ml-monitoring)
 2. [Drift taxonomy](#2-drift-taxonomy)
@@ -289,6 +300,59 @@ curl -X POST -H "Authorization: Bearer $GRAFANA_TOKEN" -H 'Content-Type: applica
 **Q8. What's your reference dataset strategy for Evidently?**
 - ❌ *Trap:* "Use the training set, always."
 - ✅ *Staff:* Use two: the training set to know when serving leaves the model's learned domain, and a rolling/seasonal window to detect abrupt breakage. Refresh the training reference at every retrain, and version it with the model so reports are reproducible.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Page on symptoms (errors, latency, fallback); ticket on causes (drift).
+2. Use histograms for latency so quantiles aggregate across pods.
+3. Never label metrics by user or request id.
+4. Use two references in Evidently: training data and a rolling or seasonal window.
+5. Track label coverage; AUC on a fast-labelled subset is biased.
+6. Add deploy annotations to Grafana so incidents line up with releases.
+
+## Worked Scenario: Green dashboards, revenue falling
+
+**Situation.** Infra metrics are fine but conversion is down 6% for a week.
+
+**Steps**
+
+1. Check prediction distribution and decision rates versus last week.
+2. Check feature null rate and freshness.
+3. Slice by region, device and new vs returning.
+4. Compare to the previous model in shadow.
+
+**Outcome.** A mobile app release stopped sending one feature; slice monitors and a null-rate alert were added.
+
+## More Interview Questions
+
+**Q9. Concept drift without labels?**
+- ❌ *Trap:* Not detectable.
+- ✅ *Staff:* Use proxies (complaints, review overturn rate), a small continuously-labelled sample, and delayed-label cohort metrics.
+
+**Q10. 12 of 40 features drift. Retrain?**
+- ❌ *Trap:* Yes.
+- ✅ *Staff:* Triage data-quality causes first, weight by importance, check whether predictions or quality moved; retrain only if harmful.
+
+**Q11. Avoid alert fatigue?**
+- ❌ *Trap:* Fewer thresholds.
+- ✅ *Staff:* Multi-window burn rates, `for:` durations, owners and runbooks, monthly alert-precision review.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | [01 Foundations](01-mlops-foundations-system-design.md) | feedback loops |
+| ⬆ Fed by | [02 Data & Features](02-data-engineering-feature-stores.md) | drift baselines |
+| ⬆ Fed by | [06 Serving](06-model-serving-architecture.md) | metrics + logs |
+| ⬆ Fed by | [07 Deployment](07-deployment-strategies-traffic-routing.md) | canary analysis |
+| ⬇ Feeds | [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | retrain trigger |
+
+![Connections](assets/tree_08_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Prev:** [← 07](07-deployment-strategies-traffic-routing.md) · **Next:** [09 · Infrastructure & Orchestration →](09-infrastructure-containerization-orchestration.md)

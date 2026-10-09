@@ -2,6 +2,17 @@
 
 > **Goal:** treat the ML system as an attack surface and a data-protection obligation: secure the endpoints, the training pipeline, the artifacts and the people.
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 10](assets/tree_10_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 10](assets/tree_10_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [ML threat model](#1-ml-threat-model)
 2. [Securing inference endpoints](#2-securing-inference-endpoints)
@@ -330,6 +341,57 @@ Authentication choices: **API keys** (simple, per-client, rotate; weak identity)
 **Q8. An adversary crafts inputs to evade your fraud model. Mitigations?**
 - ❌ *Trap:* "Retrain more often."
 - ✅ *Staff:* Treat it as an arms race: don't expose scores, add randomised/ensemble defenses and non-model rules, adversarial training with generated perturbations, monitor for distribution shift in rejected/accepted patterns, fast feedback from confirmed fraud, rate-limit probing accounts, and use features hard to manipulate (behavioural/graph) over trivially-controllable ones.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Never `pickle.load` untrusted files; use safetensors or ONNX and verify signatures.
+2. Allow-list JWT algorithms; always validate aud, iss and exp.
+3. Return decisions or buckets, not raw probabilities, on public APIs.
+4. Per-tenant quotas plus anomaly detection catch extraction attempts.
+5. Log hashes or tokens instead of raw PII.
+6. Split train and promote rights; only CI can write the champion alias.
+
+## Worked Scenario: Suspected model extraction
+
+**Situation.** One API key issues grid-like queries at 3 AM.
+
+**Steps**
+
+1. Rate-limit and flag the key.
+2. Check query diversity and systematic patterns.
+3. Switch outputs to buckets for that tenant.
+4. Review contract terms and add watermark canaries.
+
+**Outcome.** Key revoked; per-tenant quotas and bucketed outputs become defaults.
+
+## More Interview Questions
+
+**Q9. DP vs federated learning?**
+- ❌ *Trap:* Same thing.
+- ✅ *Staff:* FL is about where data lives; DP bounds what outputs reveal. Combine FL, secure aggregation and DP for high-stakes siloed data.
+
+**Q10. Defend a continuously-trained model from poisoning?**
+- ❌ *Trap:* Clean the data.
+- ✅ *Staff:* Provenance, per-source influence limits, anomaly screening, golden-set and backdoor tests, snapshots for rollback.
+
+**Q11. GDPR erasure for a deployed model?**
+- ❌ *Trap:* Delete the DB row.
+- ✅ *Staff:* Lineage to all stores and snapshots, exclude from next training, assess memorisation, document evidence.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | [04 Registry](04-model-registry-governance.md) | RBAC + approvals |
+| ⬇ Feeds | [06 Serving](06-model-serving-architecture.md) | endpoint hardening |
+| ⬇ Feeds | [09 Infra & K8s](09-infrastructure-containerization-orchestration.md) | pod + supply-chain security |
+
+![Connections](assets/tree_10_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Prev:** [← 09](09-infrastructure-containerization-orchestration.md) · **Next:** [11 · Production Failures & Troubleshooting →](11-production-failures-troubleshooting.md)

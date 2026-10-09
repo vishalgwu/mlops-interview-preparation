@@ -2,6 +2,17 @@
 
 > **Goal:** guarantee that the data feeding training and serving is valid, consistent, point-in-time correct, and traceable.
 
+### 🌳 Decision Tree: which component, and when?
+
+![Decision tree for module 2](assets/tree_02_decisions.svg)
+
+### 🔗 How this module intersects the others
+
+![Connection map for module 2](assets/tree_02_connections.svg)
+
+> Full course map: [assets/tree_00_master_map.svg](assets/tree_00_master_map.svg)
+
+
 **Contents**
 1. [Data contracts & validation](#1-data-contracts--validation)
 2. [Feature stores: offline vs online](#2-feature-stores-offline-vs-online)
@@ -358,6 +369,58 @@ Always stamp the **prediction log** so any prediction is traceable:
 **Q8. How do you make deletion requests (GDPR) work with lineage?**
 - ❌ *Trap:* "Delete the row in the database."
 - ✅ *Staff:* Use lineage to find every dataset, feature table, cache and training snapshot containing the subject's key; delete or tokenize there; record the deletion; and decide per policy whether affected models need retraining (usually by schedule, with proof the subject is excluded from the next training snapshot). Pseudonymous keys with a separate mapping table make erasure a single-table operation.
+
+
+<!-- appendix:start -->
+
+## Tips, Tricks & Field Notes
+
+1. Validate at every boundary: edge (Pydantic), batch (GX), pre-train (drift), post-hoc (served-feature logs).
+2. Always log the exact feature vector you served; it is the only way to prove or disprove skew later.
+3. Set Feast TTL from refresh cadence plus a buffer; a TTL shorter than the refresh gives silent nulls.
+4. Use PSI plus effect-size, not only KS p-values; large N makes p-values meaningless.
+5. Version features like APIs: breaking change means a new feature view side by side.
+6. Put a row-count guard in every batch suite; half-loaded partitions pass most schema checks.
+
+## Worked Scenario: Nulls jump to 3% after a deploy
+
+**Situation.** Fraud scoring shows 3% of requests with default-filled features right after a release.
+
+**Steps**
+
+1. Check last-materialized timestamp versus TTL.
+2. Diff entity key serialization / join keys between old and new release.
+3. Check Redis eviction and cold-start entities.
+4. Add a per-feature missing-rate metric and a freshness alert.
+
+**Outcome.** Root cause: a join key rename. Fixed in the registry plus alert so the next one pages before users notice.
+
+## More Interview Questions
+
+**Q9. How do you test for point-in-time leakage?**
+- ❌ *Trap:* Look at AUC.
+- ✅ *Staff:* Shift label timestamps backwards and assert features change accordingly; compare logged serving features to the offline PIT reconstruction.
+
+**Q10. Great Expectations says pass but model quality fell. Why?**
+- ❌ *Trap:* GX is broken.
+- ✅ *Staff:* Schema checks do not cover semantic drift (cents vs dollars) or joint distributions. Add range/unit expectations and distribution monitors.
+
+**Q11. Backfill vs streaming parity?**
+- ❌ *Trap:* Just run the same SQL.
+- ✅ *Staff:* Replay a day of events through both paths and diff; handle late events with watermarks; define a freshness SLO.
+
+## Where This Module Connects
+
+| Direction | Module | What flows |
+|---|---|---|
+| ⬆ Fed by | [01 Foundations](01-mlops-foundations-system-design.md) | data lifecycle |
+| ⬇ Feeds | [03 Experiments](03-experiment-tracking-model-versioning.md) | versioned data |
+| ⬇ Feeds | [08 Monitoring](08-monitoring-observability-alerting.md) | drift baselines |
+| ⬇ Feeds | [11 Failures](11-production-failures-troubleshooting.md) | skew incidents |
+
+![Connections](assets/tree_02_connections.svg)
+
+<!-- appendix:end -->
 
 ---
 **Prev:** [← 01](01-mlops-foundations-system-design.md) · **Next:** [03 · Experiment Tracking & Versioning →](03-experiment-tracking-model-versioning.md)

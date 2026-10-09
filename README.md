@@ -29,6 +29,89 @@
 
 Every module zooms into one part of this loop. Each includes: **first-principles theory → executable code & manifests → real failure modes → 5–8 scenario questions with a "Trap Answer" and a "Staff-Level Answer" → diagrams.**
 
+## 🌳 How the Modules Connect
+
+<p align="center">
+  <img src="assets/tree_00_master_map.svg" alt="Master tree showing how the 12 modules feed into each other" width="100%"/>
+</p>
+
+Each module opens with a **decision tree** (which component, and when?) and a **connection map** (what feeds it, what it feeds). The pink arc is the continuous-training loop: Monitoring (08) triggers CI/CD/CT (05).
+
+<details>
+<summary><b>All module connections as a table</b></summary>
+
+| From | To | What flows |
+|---|---|---|
+| [01 Foundations](01-mlops-foundations-system-design.md) | [02 Data & Features](02-data-engineering-feature-stores.md) | data lifecycle |
+| [01 Foundations](01-mlops-foundations-system-design.md) | [03 Experiments](03-experiment-tracking-model-versioning.md) | reproducibility |
+| [01 Foundations](01-mlops-foundations-system-design.md) | [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | maturity levels |
+| [01 Foundations](01-mlops-foundations-system-design.md) | [08 Monitoring](08-monitoring-observability-alerting.md) | feedback loops |
+| [02 Data & Features](02-data-engineering-feature-stores.md) | [03 Experiments](03-experiment-tracking-model-versioning.md) | versioned data |
+| [02 Data & Features](02-data-engineering-feature-stores.md) | [08 Monitoring](08-monitoring-observability-alerting.md) | drift baselines |
+| [02 Data & Features](02-data-engineering-feature-stores.md) | [11 Failures](11-production-failures-troubleshooting.md) | skew incidents |
+| [03 Experiments](03-experiment-tracking-model-versioning.md) | [04 Registry](04-model-registry-governance.md) | runs become versions |
+| [04 Registry](04-model-registry-governance.md) | [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | gates + promotion |
+| [04 Registry](04-model-registry-governance.md) | [10 Security](10-security-privacy-compliance.md) | RBAC + approvals |
+| [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | [06 Serving](06-model-serving-architecture.md) | builds images |
+| [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | [07 Deployment](07-deployment-strategies-traffic-routing.md) | progressive delivery |
+| [08 Monitoring](08-monitoring-observability-alerting.md) | [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | retrain trigger |
+| [06 Serving](06-model-serving-architecture.md) | [07 Deployment](07-deployment-strategies-traffic-routing.md) | versions to route |
+| [06 Serving](06-model-serving-architecture.md) | [08 Monitoring](08-monitoring-observability-alerting.md) | metrics + logs |
+| [09 Infra & K8s](09-infrastructure-containerization-orchestration.md) | [06 Serving](06-model-serving-architecture.md) | hosts serving |
+| [07 Deployment](07-deployment-strategies-traffic-routing.md) | [08 Monitoring](08-monitoring-observability-alerting.md) | canary analysis |
+| [07 Deployment](07-deployment-strategies-traffic-routing.md) | [11 Failures](11-production-failures-troubleshooting.md) | rollback |
+| [09 Infra & K8s](09-infrastructure-containerization-orchestration.md) | [11 Failures](11-production-failures-troubleshooting.md) | OOM, cold start |
+| [10 Security](10-security-privacy-compliance.md) | [06 Serving](06-model-serving-architecture.md) | endpoint hardening |
+| [10 Security](10-security-privacy-compliance.md) | [09 Infra & K8s](09-infrastructure-containerization-orchestration.md) | pod + supply-chain security |
+| [11 Failures](11-production-failures-troubleshooting.md) | [12 Interview Kit](12-mlops-interview-cheatsheet-system-design.md) | interview stories |
+
+</details>
+
+## 📅 Prefer a Guided Month?
+
+Follow the **[30-Day Course](COURSE-30-DAY.md)**: daily reading, hands-on lab, interview drill and tip, weekly checkpoints, a final project and a self-assessment grid.
+
+<details>
+<summary><b>Decision trees for every module</b></summary>
+
+### 01 · [Foundations](01-mlops-foundations-system-design.md)
+<img src="assets/tree_01_decisions.svg" alt="Decision tree for Foundations" width="100%"/>
+
+### 02 · [Data & Features](02-data-engineering-feature-stores.md)
+<img src="assets/tree_02_decisions.svg" alt="Decision tree for Data & Features" width="100%"/>
+
+### 03 · [Experiments](03-experiment-tracking-model-versioning.md)
+<img src="assets/tree_03_decisions.svg" alt="Decision tree for Experiments" width="100%"/>
+
+### 04 · [Registry](04-model-registry-governance.md)
+<img src="assets/tree_04_decisions.svg" alt="Decision tree for Registry" width="100%"/>
+
+### 05 · [CI/CD/CT](05-cicd-ct-automation-pipelines.md)
+<img src="assets/tree_05_decisions.svg" alt="Decision tree for CI/CD/CT" width="100%"/>
+
+### 06 · [Serving](06-model-serving-architecture.md)
+<img src="assets/tree_06_decisions.svg" alt="Decision tree for Serving" width="100%"/>
+
+### 07 · [Deployment](07-deployment-strategies-traffic-routing.md)
+<img src="assets/tree_07_decisions.svg" alt="Decision tree for Deployment" width="100%"/>
+
+### 08 · [Monitoring](08-monitoring-observability-alerting.md)
+<img src="assets/tree_08_decisions.svg" alt="Decision tree for Monitoring" width="100%"/>
+
+### 09 · [Infra & K8s](09-infrastructure-containerization-orchestration.md)
+<img src="assets/tree_09_decisions.svg" alt="Decision tree for Infra & K8s" width="100%"/>
+
+### 10 · [Security](10-security-privacy-compliance.md)
+<img src="assets/tree_10_decisions.svg" alt="Decision tree for Security" width="100%"/>
+
+### 11 · [Failures](11-production-failures-troubleshooting.md)
+<img src="assets/tree_11_decisions.svg" alt="Decision tree for Failures" width="100%"/>
+
+### 12 · [Interview Kit](12-mlops-interview-cheatsheet-system-design.md)
+<img src="assets/tree_12_decisions.svg" alt="Decision tree for Interview Kit" width="100%"/>
+
+</details>
+
 ---
 
 ## 📚 Curriculum Navigation
@@ -51,6 +134,8 @@ Every module zooms into one part of this loop. Each includes: **first-principles
 ---
 
 ## 🗓️ Study Roadmaps
+
+> Want the full guided version? See the **[30-Day Course](COURSE-30-DAY.md)**.
 
 ### ⚡ 3-Day Crash Course (interview in a week)
 | Day | Focus | Do |
@@ -231,7 +316,11 @@ Clean up: `docker compose down -v` · `minikube delete`.
 ```
 mlops-interview-preparation/
 ├── README.md
-├── assets/mlops_end_to_end_architecture.svg
+├── COURSE-30-DAY.md
+├── assets/
+│   ├── mlops_end_to_end_architecture.svg
+│   ├── tree_00_master_map.svg
+│   └── tree_NN_decisions.svg / tree_NN_connections.svg   (one pair per module)
 ├── 01-mlops-foundations-system-design.md
 ├── 02-data-engineering-feature-stores.md
 ├── 03-experiment-tracking-model-versioning.md

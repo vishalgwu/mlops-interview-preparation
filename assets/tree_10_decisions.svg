@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 975 760" width="975" height="760" role="img" aria-label="Decision tree for module 10" font-family="'Segoe UI',Helvetica,Arial,sans-serif">
+<title>Module 10 decision tree: Which security control?</title>
+<rect width="975" height="760" rx="16" fill="#f3f2fb"/>
+<rect x="353.7" y="20.0" width="267.6" height="52.0" rx="26.0" fill="#1f1b5a"/><text x="487.5" y="41.9" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Module 10 · Security</text><text x="487.5" y="59.9" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Which security control?</text>
+<text x="24" y="30" fill="#5b5a80" font-size="11">Navy oval = decision · pink check = yes · dark cross = no · plain text = what to use, and when</text>
+<path d="M487.5 72.0 V120 H300 V126" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="206.7" y="126.5" width="186.6" height="47.0" rx="23.5" fill="#1f1b5a"/><text x="300" y="146.3" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">Loading an untrusted</text><text x="300" y="161.8" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">artifact?</text>
+<path d="M290 173.5 L225 201" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M310 173.5 L375 201" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="225" cy="210" r="9" fill="#e0368c"/><path d="M221 210 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="375" cy="210" r="9" fill="#2d2a6e"/><path d="M371.5 206.5 l7 7 M378.5 206.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="55" y="250" fill="#1b1a3a" font-size="13" font-weight="700">Safetensors / ONNX</text><text x="55" y="267" fill="#5b5a80" font-size="11">• never pickle</text><text x="55" y="282" fill="#5b5a80" font-size="11">• cosign verify before load</text><text x="55" y="297" fill="#5b5a80" font-size="11">• pip-audit + hash pins</text>
+<path d="M379 218 L415 261.5" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="338.8" y="269.2" width="172.3" height="31.5" rx="15.8" fill="#1f1b5a"/><text x="425" y="289.0" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">Public-facing API?</text>
+<path d="M415 300.75 L350 336" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M435 300.75 L500 336" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="350" cy="345" r="9" fill="#e0368c"/><path d="M346 345 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="500" cy="345" r="9" fill="#2d2a6e"/><path d="M496.5 341.5 l7 7 M503.5 341.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="180" y="385" fill="#1b1a3a" font-size="13" font-weight="700">Harden the endpoint</text><text x="180" y="402" fill="#5b5a80" font-size="11">• JWT RS256, algorithm allow-list</text><text x="180" y="417" fill="#5b5a80" font-size="11">• rate limit + per-tenant quota</text><text x="180" y="432" fill="#5b5a80" font-size="11">• bucket outputs vs extraction</text>
+<path d="M504 353 L540 404.25" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="467.4" y="396.5" width="165.2" height="47.0" rx="23.5" fill="#1f1b5a"/><text x="550" y="416.3" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">Data cannot leave</text><text x="550" y="431.8" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">silos?</text>
+<path d="M540 443.5 L475 471" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M560 443.5 L625 471" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="475" cy="480" r="9" fill="#e0368c"/><path d="M471 480 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="625" cy="480" r="9" fill="#2d2a6e"/><path d="M621.5 476.5 l7 7 M628.5 476.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="305" y="520" fill="#1b1a3a" font-size="13" font-weight="700">Federated + DP</text><text x="305" y="537" fill="#5b5a80" font-size="11">• secure aggregation</text><text x="305" y="552" fill="#5b5a80" font-size="11">• clip + noise updates</text><text x="305" y="567" fill="#5b5a80" font-size="11">• robust aggregation</text>
+<path d="M629 488 L665 531.5" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="581.7" y="531.5" width="186.6" height="47.0" rx="23.5" fill="#1f1b5a"/><text x="675" y="551.3" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">Releasing stats or a</text><text x="675" y="566.8" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">model publicly?</text>
+<path d="M665 578.5 L600 606" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M685 578.5 L750 606" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="600" cy="615" r="9" fill="#e0368c"/><path d="M596 615 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="750" cy="615" r="9" fill="#2d2a6e"/><path d="M746.5 611.5 l7 7 M753.5 611.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="430" y="655" fill="#1b1a3a" font-size="13" font-weight="700">Differential privacy</text><text x="430" y="672" fill="#5b5a80" font-size="11">• DP-SGD with epsilon budget</text><text x="430" y="687" fill="#5b5a80" font-size="11">• track cumulative epsilon</text><text x="430" y="702" fill="#5b5a80" font-size="11">• membership-inference test</text>
+<text x="710" y="655" fill="#1b1a3a" font-size="13" font-weight="700">RBAC + audit</text><text x="710" y="672" fill="#5b5a80" font-size="11">• least-privilege ServiceAccounts</text><text x="710" y="687" fill="#5b5a80" font-size="11">• builder is not approver</text><text x="710" y="702" fill="#5b5a80" font-size="11">• redacted structured logs</text>
+<text x="24" y="738" fill="#5b5a80" font-size="11" font-style="italic">Details, code and interview Q&amp;A: 10-security-privacy-compliance.md</text>
+</svg>
