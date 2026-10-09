@@ -35,27 +35,27 @@
   <text x="40" y="76" class="st">Data → Features → Training → Registry → CI/CD → Serving → Monitoring → Retraining</text>
 
   <!-- lanes -->
-  <rect x="30" y="100" width="1340" height="190" class="lane"/>
+  <rect x="30" y="100" width="1340" height="190" class="lane" rx="14"/>
   <text x="46" y="122" class="s">DATA PLANE</text>
-  <rect x="30" y="310" width="1340" height="190" class="lane"/>
+  <rect x="30" y="310" width="1340" height="190" class="lane" rx="14"/>
   <text x="46" y="332" class="s">MODEL PLANE</text>
-  <rect x="30" y="520" width="1340" height="270" class="lane"/>
+  <rect x="30" y="520" width="1340" height="270" class="lane" rx="14"/>
   <text x="46" y="542" class="s">SERVING &amp; FEEDBACK PLANE</text>
 
   <!-- Data plane -->
-  <rect x="60" y="150" width="230" height="110" class="box data"/>
+  <rect x="60" y="150" width="230" height="110" class="box data" rx="10"/>
   <text x="80" y="180" class="h">1 · RAW DATA</text>
   <text x="80" y="202" class="s">S3 / GCS data lake · Kafka streams</text>
   <text x="80" y="220" class="s">warehouse (BigQuery, Snowflake)</text>
   <text x="80" y="238" class="s">immutable, partitioned by date</text>
 
-  <rect x="420" y="150" width="250" height="110" class="box data"/>
+  <rect x="420" y="150" width="250" height="110" class="box data" rx="10"/>
   <text x="440" y="180" class="h">2 · DATA VALIDATION</text>
   <text x="440" y="202" class="s">Great Expectations · Pydantic</text>
   <text x="440" y="220" class="s">schema + distribution checks</text>
   <text x="440" y="238" class="s">quarantine bad batches</text>
 
-  <rect x="800" y="150" width="270" height="110" class="box feat"/>
+  <rect x="800" y="150" width="270" height="110" class="box feat" rx="10"/>
   <text x="820" y="180" class="h">3 · FEATURE STORE (Feast)</text>
   <text x="820" y="202" class="s">offline: Parquet / BigQuery (PIT joins)</text>
   <text x="820" y="220" class="s">online: Redis (ms lookups)</text>
@@ -65,19 +65,19 @@
   <path d="M670 205 H800" class="flow"/>
 
   <!-- Model plane -->
-  <rect x="800" y="360" width="270" height="110" class="box train"/>
+  <rect x="800" y="360" width="270" height="110" class="box train" rx="10"/>
   <text x="820" y="390" class="h">4 · TRAINING + DVC</text>
   <text x="820" y="412" class="s">DVC pipeline: data + code hash</text>
   <text x="820" y="430" class="s">MLflow tracking · Ray / GPU jobs</text>
   <text x="820" y="448" class="s">reproducible, parameterised runs</text>
 
-  <rect x="420" y="360" width="250" height="110" class="box reg"/>
+  <rect x="420" y="360" width="250" height="110" class="box reg" rx="10"/>
   <text x="440" y="390" class="h">5 · MLFLOW REGISTRY</text>
   <text x="440" y="412" class="s">versions · aliases (champion)</text>
   <text x="440" y="430" class="s">model cards · approvals · audit</text>
   <text x="440" y="448" class="s">lineage to data + git SHA</text>
 
-  <rect x="60" y="360" width="230" height="110" class="box ci"/>
+  <rect x="60" y="360" width="230" height="110" class="box ci" rx="10"/>
   <text x="80" y="390" class="h">6 · CI/CD AUTOMATION</text>
   <text x="80" y="412" class="s">GitHub Actions · Argo Workflows</text>
   <text x="80" y="430" class="s">tests · eval gates · image build</text>
@@ -88,7 +88,7 @@
   <path d="M420 415 H290" class="flow"/>
 
   <!-- Serving plane -->
-  <rect x="60" y="580" width="260" height="170" class="box dep"/>
+  <rect x="60" y="580" width="260" height="170" class="box dep" rx="10"/>
   <text x="80" y="610" class="h">7 · K8s + TRITON / FASTAPI</text>
   <text x="80" y="632" class="s">Deployments · HPA · Ingress</text>
   <text x="80" y="650" class="s">Istio canary / shadow / blue-green</text>
@@ -96,7 +96,7 @@
   <text x="80" y="686" class="s">fallback model + circuit breaker</text>
   <text x="80" y="704" class="s">RBAC · mTLS · API gateway authN</text>
 
-  <rect x="500" y="580" width="270" height="170" class="box mon"/>
+  <rect x="500" y="580" width="270" height="170" class="box mon" rx="10"/>
   <text x="520" y="610" class="h">8 · MONITORING</text>
   <text x="520" y="632" class="s">Prometheus: latency, errors, saturation</text>
   <text x="520" y="650" class="s">Evidently: data / prediction drift</text>
@@ -104,7 +104,7 @@
   <text x="520" y="686" class="s">delayed-label quality metrics</text>
   <text x="520" y="704" class="s">SLOs + error budgets</text>
 
-  <rect x="950" y="580" width="270" height="170" class="box train"/>
+  <rect x="950" y="580" width="270" height="170" class="box train" rx="10"/>
   <text x="970" y="610" class="h">9 · RETRAINING TRIGGERS</text>
   <text x="970" y="632" class="s">drift score &gt; threshold</text>
   <text x="970" y="650" class="s">metric decay vs. baseline</text>
