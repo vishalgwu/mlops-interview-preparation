@@ -61,7 +61,11 @@
     "mermaidTheme": "default",
     "searchAlways": true,
     "titleSuffix": "Open-source interview prep",
-    "footerNote": "Open-source learning project. Code samples are syntax-checked; library calls may drift between versions, so verify against current docs. The storefront-style design is an homage to e-commerce sites: it uses no copied logos, ratings, reviews or prices (everything here is free and MIT-licensed), and this project is not affiliated with or endorsed by Flipkart."
+    "footerNote": "Open-source learning project. Code samples are syntax-checked; library calls may drift between versions, so verify against current docs. The storefront-style design is an homage to e-commerce sites: it uses no copied logos, ratings, reviews or prices (everything here is free and MIT-licensed), and this project is not affiliated with or endorsed by Flipkart.",
+    "faviconText": "ML",
+    "faviconBg": "#2874F0",
+    "faviconFg": "#FFE500",
+    "themeColor": "#2874F0"
   },
   "chapters": {
     "1": {

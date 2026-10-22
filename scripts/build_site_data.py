@@ -47,6 +47,15 @@ def patch_index():
     html = html.replace(">AI ENGINEERING<", f">{CFG['brand']}<")
     if CFG.get("theme"):
         html = html.replace("<body>", f'<body data-theme="{CFG["theme"]}">', 1)
+    if CFG.get("faviconText"):          # per-project tab icon (SVG data URI)
+        svg = ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>"
+               f"<rect width='64' height='64' rx='12' fill='{CFG['faviconBg']}'/>"
+               f"<text x='32' y='44' font-family='Arial Black,Arial' font-weight='900' font-size='30' "
+               f"text-anchor='middle' fill='{CFG['faviconFg']}'>{CFG['faviconText']}</text></svg>")
+        uri = "data:image/svg+xml," + svg.replace("<", "%3C").replace(">", "%3E").replace("#", "%23")
+        html = re.sub(r'<link rel="icon" href="[^"]*">', lambda m: f'<link rel="icon" href="{uri}">', html, count=1)
+    if CFG.get("themeColor"):           # tints the browser tab / address bar on supporting browsers
+        html = re.sub(r'(<meta name="theme-color" content=")[^"]*(")', lambda m: m.group(1) + CFG["themeColor"] + m.group(2), html, count=1)
     (SITE / "index.html").write_text(html, encoding="utf-8", newline="\n")
 
 
