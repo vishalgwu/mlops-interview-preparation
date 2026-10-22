@@ -49,7 +49,7 @@
   };
 
   /* ---------- generative poster art ---------- */
-  const PALETTES = [["#E50914", "#2a0709"], ["#B20710", "#120a0b"], ["#ff3040", "#3a0a0f"], ["#8f0b12", "#0e0e0e"], ["#d40f1c", "#1d0b0d"], ["#6e0a10", "#161616"]];
+  const PALETTES = (C.palettes && C.palettes.length) ? C.palettes : [["#E50914", "#2a0709"], ["#B20710", "#120a0b"], ["#ff3040", "#3a0a0f"], ["#8f0b12", "#0e0e0e"], ["#d40f1c", "#1d0b0d"], ["#6e0a10", "#161616"]];
   function poster(ch, kind) {
     const tall = kind === "tall";
     const W = tall ? 200 : 320, H = tall ? 300 : 180;
@@ -96,12 +96,12 @@
     const p = progress[ch.num]; const pct = p ? Math.min(100, Math.round(p.pct)) : 0;
     const isNew = (C.newChapters || []).includes(ch.num) && !opts.noTag;
     return `<div class="card" tabindex="0" data-ch="${ch.num}" role="button" aria-label="${esc(ch.title)}">
-      <div class="poster">${poster(ch)}<span class="tag">${isNew ? '<span class="tag new" style="position:static">${esc(C.newLabel)}</span>' : esc(C.posterTag)}</span>
+      <div class="poster">${poster(ch)}<span class="tag">${isNew ? `<span class="tag new" style="position:static">${esc(C.newLabel)}</span>` : esc(C.posterTag)}</span>
       ${pct > 1 ? `<div class="prog"><span style="width:${pct}%"></span></div>` : ""}</div>${cardInfo(ch)}</div>`;
   }
   function topCard(ch, rank) {
     return `<div class="card" tabindex="0" data-ch="${ch.num}" role="button" aria-label="Number ${rank}: ${esc(ch.title)}">
-      <span class="rank" aria-hidden="true">${rank}</span><div class="cardbox"><div class="poster">${poster(ch, "tall")}</div>${cardInfo(ch)}</div></div>`;
+      <span class="rank" aria-hidden="true">${rank}</span><div class="cardbox"><div class="poster">${poster(ch, C.top10Tall === false ? undefined : "tall")}</div>${cardInfo(ch)}</div></div>`;
   }
   function conceptCard(c) {
     const ch = byNum[c.chapter];
@@ -227,7 +227,7 @@
     if (!blocks.length) return;
     try {
       const mm = await loadMermaid();
-      mm.initialize({ startOnLoad: false, theme: "dark", securityLevel: "strict", themeVariables: { primaryColor: "#2a0709", primaryBorderColor: "#E50914", lineColor: "#b3b3b3", primaryTextColor: "#fff" } });
+      mm.initialize(C.mermaidTheme === "default" ? { startOnLoad: false, theme: "default", securityLevel: "strict" } : { startOnLoad: false, theme: "dark", securityLevel: "strict", themeVariables: { primaryColor: "#2a0709", primaryBorderColor: "#E50914", lineColor: "#b3b3b3", primaryTextColor: "#fff" } });
       for (const c of blocks) {
         const pre = c.closest("pre"); const d = document.createElement("div"); d.className = "mermaid"; d.textContent = c.textContent;
         pre.replaceWith(d);
@@ -328,7 +328,7 @@
     profile = PROFILES.find((p) => p.id === id) || null; store.set("profile", profile);
     $("#gate").classList.add("hidden"); document.body.style.overflow = "";
     $("#avatar-initial").textContent = profile ? profile.initial : "VF"; $(".avatar").style.background = profile ? profile.color : "";
-    if (!sessionStorage.getItem(C.storage + ":splash") && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (C.splash !== false && !sessionStorage.getItem(C.storage + ":splash") && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
       try { sessionStorage.setItem(C.storage + ":splash", "1"); } catch (e) { /* ignore */ }
       const s = $("#splash"); s.classList.remove("hidden"); setTimeout(() => s.classList.add("hidden"), 2700);
     }
@@ -371,7 +371,7 @@
     if (cur && !typing) { if (e.key === "n") stepChapter(1); if (e.key === "p") stepChapter(-1); }
     if ((e.key === "Enter" || e.key === " ") && document.activeElement && document.activeElement.matches(".card, .ep, .profile")) { e.preventDefault(); document.activeElement.click(); }
   });
-  $("#search-btn").onclick = () => { const s = $("#search"); s.classList.toggle("open"); if (s.classList.contains("open")) $("#search-input").focus(); else { $("#search-input").value = ""; runSearch(""); } };
+  $("#search-btn").onclick = () => { if (C.searchAlways) { runSearch($("#search-input").value); $("#search-input").focus(); return; } const s = $("#search"); s.classList.toggle("open"); if (s.classList.contains("open")) $("#search-input").focus(); else { $("#search-input").value = ""; runSearch(""); } };
   let st; $("#search-input").addEventListener("input", (e) => { clearTimeout(st); st = setTimeout(() => runSearch(e.target.value), 120); });
   $("#search-input").addEventListener("blur", (e) => { if (!e.target.value) $("#search").classList.remove("open"); });
   $("#avatar").onclick = showGate; $("#gate-skip").onclick = () => pick("");
@@ -393,7 +393,8 @@
     $("#stats").innerHTML = `<span><b>${t.chapters}</b>chapters</span><span><b>${t.sections}</b>concept episodes</span><span><b>${t.code}</b>code samples</span><span><b>${(t.words / 1000).toFixed(0)}k</b>words</span><span><b>MIT</b>open source</span>`;
   }
   function applyBrand() {
-    document.title = `${C.title} - Binge the Series`;
+    document.title = `${C.title} - ${C.titleSuffix || "Binge the Series"}`;
+    if (C.theme) document.body.dataset.theme = C.theme;
     $$(".wordmark").forEach((w) => (w.textContent = C.brand));
     const sw = $(".splash-word"); if (sw) sw.textContent = C.brand;
     const sy = $(".splash-year"); if (sy) sy.textContent = C.year;
@@ -401,10 +402,11 @@
     const gh = $(".gate h1"); if (gh) gh.textContent = C.gateTitle;
     const gs = $(".gate-sub"); if (gs) gs.textContent = C.gateSub;
     const si = $("#search-input"); if (si) si.placeholder = C.search;
+    const fnote = $(".foot-note"); if (fnote && C.footerNote) fnote.textContent = C.footerNote;
     $$('a[href*="ultimate-ai-engineering-roadmap-2026"]').forEach((a) => (a.href = a.href.replace("https://github.com/vishalgwu/ultimate-ai-engineering-roadmap-2026", GH)));
   }
   applyBrand();
-  stats(); setHero(0); startHero(); heroCanvas();
+  stats(); setHero(0); startHero(); if (C.canvas !== false) heroCanvas();
   if (profile) { $("#avatar-initial").textContent = profile.initial; $(".avatar").style.background = profile.color; renderRows(); } else { renderRows(); if (!/^#\/read\//.test(location.hash)) showGate(); }
   route();
 })();

@@ -38,13 +38,15 @@ def patch_index():
     html = tpl.read_text(encoding="utf-8")
     repo_path = CFG["repo"].replace("https://github.com/", "")
     html = html.replace(ROADMAP_REPO, repo_path)
-    title = f"{CFG['title']} - Binge the Series"
+    title = f"{CFG['title']} - {CFG.get('titleSuffix', 'Binge the Series')}"
     html = re.sub(r"<title>.*?</title>", f"<title>{title}</title>", html, flags=re.S)
     desc = CFG.get("description", CFG["title"])
     html = re.sub(r'(<meta name="description" content=")[^"]*(")', lambda m: m.group(1) + desc + m.group(2), html)
     html = re.sub(r'(<meta property="og:title" content=")[^"]*(")', lambda m: m.group(1) + CFG["title"] + m.group(2), html)
     html = re.sub(r'(<meta property="og:description" content=")[^"]*(")', lambda m: m.group(1) + desc + m.group(2), html)
     html = html.replace(">AI ENGINEERING<", f">{CFG['brand']}<")
+    if CFG.get("theme"):
+        html = html.replace("<body>", f'<body data-theme="{CFG["theme"]}">', 1)
     (SITE / "index.html").write_text(html, encoding="utf-8", newline="\n")
 
 

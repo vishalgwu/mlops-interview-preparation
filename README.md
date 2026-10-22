@@ -1,12 +1,12 @@
 <div align="center">
 
-<a href="https://mlops-interview-preparation.vercel.app"><img src="docs/screenshots/01-hero.jpg" alt="MLOps Interview Preparation: streaming-style home page" width="100%"></a>
+<a href="https://mlops-interview-preparation.vercel.app"><img src="docs/screenshots/01-hero.jpg" alt="MLOps Interview Preparation: storefront-style home page" width="100%"></a>
 
 # 🚀 MLOps Interview Preparation
 
 **A zero-to-hero, production-grade MLOps curriculum: 22 modules, 255 concept episodes, runnable code, failure post-mortems, and staff-level interview Q&A.**
 
-[![Live site](https://img.shields.io/badge/%E2%96%B6%20Watch%20the%20series-live%20site-E50914?style=for-the-badge&labelColor=141414)](https://mlops-interview-preparation.vercel.app)
+[![Live site](https://img.shields.io/badge/Open%20the%20site-live%20site-2874F0?style=for-the-badge&labelColor=172337)](https://mlops-interview-preparation.vercel.app)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
@@ -27,27 +27,24 @@
 
 ---
 
-## 🎬 The Streaming-Style Site
+## 🛍️ The Storefront-Style Site
 
-The whole course is also a zero-dependency web app (`site/`, plain HTML/CSS/JS): modules are **titles**, sections are **episodes**, and revision feels like binge-watching. **[Open the live site](https://mlops-interview-preparation.vercel.app)**.
+The whole course is also a zero-dependency web app (`site/`, plain HTML/CSS/JS): modules are **catalogue items** on shelves, sections are **episodes**, and revision feels like browsing a store (everything is free). The styling takes cues from a familiar blue-and-orange e-commerce layout: a search bar, a category strip, a banner, shelf carousels, a numbered Top 10, and a detail page per module. **[Open the live site](https://mlops-interview-preparation.vercel.app)**.
 
 <table>
 <tr>
-<td width="50%"><img src="docs/screenshots/02-rows-top10.jpg" alt="Rows and Top 10 modules"><br><sub><b>Rows and Top 10</b>: role-based "Top Picks" and the modules interviewers ask about most.</sub></td>
-<td width="50%"><img src="docs/screenshots/03-reader-diagram.jpg" alt="Reader with episode sidebar and decision-tree diagram"><br><sub><b>Reader</b>: all episodes in a sidebar, progress tracking, and the decision-tree diagrams inline.</sub></td>
+<td width="50%"><img src="docs/screenshots/02-rows-top10.jpg" alt="Shelves and Top 10 modules"><br><sub><b>Shelves and Top 10</b>: role-based "Top Picks" and a numbered Top 10, with Read now / List buttons on every card.</sub></td>
+<td width="50%"><img src="docs/screenshots/05-detail-modal.jpg" alt="Module detail page with episodes"><br><sub><b>Detail page</b>: tools, genres and an episode list for every section.</sub></td>
 </tr>
 <tr>
+<td width="50%"><img src="docs/screenshots/03-reader-diagram.jpg" alt="Reader with episode sidebar and decision-tree diagram"><br><sub><b>Reader</b>: light theme, all episodes in a sidebar, progress tracking, decision-tree diagrams inline.</sub></td>
 <td width="50%" align="center"><img src="docs/screenshots/04-mobile.jpg" alt="Mobile layout" width="220"><br><sub><b>Mobile</b>: responsive, no horizontal scrolling.</sub></td>
-<td width="50%"><b>Features</b><br><br>
-• Interview profiles reorder the recommendations<br>
-• Reader remembers where you stopped; "Continue Reading" row<br>
-• My List and search over all 255 episode titles (`/` focuses search)<br>
-• Deep links such as `#/read/13/13.2`<br>
-• Private: progress lives only in your browser's `localStorage`</td>
 </tr>
 </table>
 
-> The visual style is an homage to streaming-service UIs and is not affiliated with or endorsed by any streaming company.
+**Features:** interview profiles reorder the recommendations; the reader remembers where you stopped (a "Continue Reading" shelf appears); My List; search over all 255 episode titles; deep links such as `#/read/13/13.2`; and everything stays private in your browser's `localStorage`.
+
+> The visual style is an homage to e-commerce storefronts. It uses no copied logos, ratings, reviews or prices, and this project is not affiliated with or endorsed by Flipkart.
 
 ---
 
