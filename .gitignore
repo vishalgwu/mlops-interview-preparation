@@ -65,3 +65,10 @@ kubeconfig*
 .DS_Store
 Thumbs.db
 *.log
+
+# build/deploy scratch
+_plan/
+.vercel/
+.env.local
+.vercel
+.env*

@@ -1,8 +1,13 @@
 <div align="center">
 
+<a href="https://mlops-interview-preparation.vercel.app"><img src="docs/screenshots/01-hero.jpg" alt="MLOps Interview Preparation: streaming-style home page" width="100%"></a>
+
 # 🚀 MLOps Interview Preparation
 
-**A zero-to-hero, production-grade MLOps curriculum — theory, runnable code, failure post-mortems, and staff-level interview Q&A.**
+**A zero-to-hero, production-grade MLOps curriculum: 22 modules, 255 concept episodes, runnable code, failure post-mortems, and staff-level interview Q&A.**
+
+[![Live site](https://img.shields.io/badge/%E2%96%B6%20Watch%20the%20series-live%20site-E50914?style=for-the-badge&labelColor=141414)](https://mlops-interview-preparation.vercel.app)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)
@@ -15,9 +20,34 @@
 ![Grafana](https://img.shields.io/badge/Grafana-dashboards-F46800?logo=grafana&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD%2FCT-2088FF?logo=githubactions&logoColor=white)
 ![Status](https://img.shields.io/badge/status-complete-brightgreen)
-![Modules](https://img.shields.io/badge/modules-12-blueviolet)
+![Modules](https://img.shields.io/badge/modules-22-blueviolet)
+![Episodes](https://img.shields.io/badge/concept%20episodes-255-E50914)
 
 </div>
+
+---
+
+## 🎬 The Streaming-Style Site
+
+The whole course is also a zero-dependency web app (`site/`, plain HTML/CSS/JS): modules are **titles**, sections are **episodes**, and revision feels like binge-watching. **[Open the live site](https://mlops-interview-preparation.vercel.app)**.
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/02-rows-top10.jpg" alt="Rows and Top 10 modules"><br><sub><b>Rows and Top 10</b>: role-based "Top Picks" and the modules interviewers ask about most.</sub></td>
+<td width="50%"><img src="docs/screenshots/03-reader-diagram.jpg" alt="Reader with episode sidebar and decision-tree diagram"><br><sub><b>Reader</b>: all episodes in a sidebar, progress tracking, and the decision-tree diagrams inline.</sub></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="docs/screenshots/04-mobile.jpg" alt="Mobile layout" width="220"><br><sub><b>Mobile</b>: responsive, no horizontal scrolling.</sub></td>
+<td width="50%"><b>Features</b><br><br>
+• Interview profiles reorder the recommendations<br>
+• Reader remembers where you stopped; "Continue Reading" row<br>
+• My List and search over all 255 episode titles (`/` focuses search)<br>
+• Deep links such as `#/read/13/13.2`<br>
+• Private: progress lives only in your browser's `localStorage`</td>
+</tr>
+</table>
+
+> The visual style is an homage to streaming-service UIs and is not affiliated with or endorsed by any streaming company.
 
 ---
 
@@ -42,28 +72,28 @@ Each module opens with a **decision tree** (which component, and when?) and a **
 
 | From | To | What flows |
 |---|---|---|
-| [01 Foundations](01-mlops-foundations-system-design.md) | [02 Data & Features](02-data-engineering-feature-stores.md) | data lifecycle |
-| [01 Foundations](01-mlops-foundations-system-design.md) | [03 Experiments](03-experiment-tracking-model-versioning.md) | reproducibility |
-| [01 Foundations](01-mlops-foundations-system-design.md) | [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | maturity levels |
-| [01 Foundations](01-mlops-foundations-system-design.md) | [08 Monitoring](08-monitoring-observability-alerting.md) | feedback loops |
-| [02 Data & Features](02-data-engineering-feature-stores.md) | [03 Experiments](03-experiment-tracking-model-versioning.md) | versioned data |
-| [02 Data & Features](02-data-engineering-feature-stores.md) | [08 Monitoring](08-monitoring-observability-alerting.md) | drift baselines |
-| [02 Data & Features](02-data-engineering-feature-stores.md) | [11 Failures](11-production-failures-troubleshooting.md) | skew incidents |
-| [03 Experiments](03-experiment-tracking-model-versioning.md) | [04 Registry](04-model-registry-governance.md) | runs become versions |
-| [04 Registry](04-model-registry-governance.md) | [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | gates + promotion |
-| [04 Registry](04-model-registry-governance.md) | [10 Security](10-security-privacy-compliance.md) | RBAC + approvals |
-| [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | [06 Serving](06-model-serving-architecture.md) | builds images |
-| [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | [07 Deployment](07-deployment-strategies-traffic-routing.md) | progressive delivery |
-| [08 Monitoring](08-monitoring-observability-alerting.md) | [05 CI/CD/CT](05-cicd-ct-automation-pipelines.md) | retrain trigger |
-| [06 Serving](06-model-serving-architecture.md) | [07 Deployment](07-deployment-strategies-traffic-routing.md) | versions to route |
-| [06 Serving](06-model-serving-architecture.md) | [08 Monitoring](08-monitoring-observability-alerting.md) | metrics + logs |
-| [09 Infra & K8s](09-infrastructure-containerization-orchestration.md) | [06 Serving](06-model-serving-architecture.md) | hosts serving |
-| [07 Deployment](07-deployment-strategies-traffic-routing.md) | [08 Monitoring](08-monitoring-observability-alerting.md) | canary analysis |
-| [07 Deployment](07-deployment-strategies-traffic-routing.md) | [11 Failures](11-production-failures-troubleshooting.md) | rollback |
-| [09 Infra & K8s](09-infrastructure-containerization-orchestration.md) | [11 Failures](11-production-failures-troubleshooting.md) | OOM, cold start |
-| [10 Security](10-security-privacy-compliance.md) | [06 Serving](06-model-serving-architecture.md) | endpoint hardening |
-| [10 Security](10-security-privacy-compliance.md) | [09 Infra & K8s](09-infrastructure-containerization-orchestration.md) | pod + supply-chain security |
-| [11 Failures](11-production-failures-troubleshooting.md) | [12 Interview Kit](12-mlops-interview-cheatsheet-system-design.md) | interview stories |
+| [01 Foundations](chapters/01_mlops_foundations_system_design.md) | [02 Data & Features](chapters/02_data_engineering_feature_stores.md) | data lifecycle |
+| [01 Foundations](chapters/01_mlops_foundations_system_design.md) | [03 Experiments](chapters/03_experiment_tracking_model_versioning.md) | reproducibility |
+| [01 Foundations](chapters/01_mlops_foundations_system_design.md) | [05 CI/CD/CT](chapters/05_cicd_ct_automation_pipelines.md) | maturity levels |
+| [01 Foundations](chapters/01_mlops_foundations_system_design.md) | [08 Monitoring](chapters/08_monitoring_observability_alerting.md) | feedback loops |
+| [02 Data & Features](chapters/02_data_engineering_feature_stores.md) | [03 Experiments](chapters/03_experiment_tracking_model_versioning.md) | versioned data |
+| [02 Data & Features](chapters/02_data_engineering_feature_stores.md) | [08 Monitoring](chapters/08_monitoring_observability_alerting.md) | drift baselines |
+| [02 Data & Features](chapters/02_data_engineering_feature_stores.md) | [11 Failures](chapters/11_production_failures_troubleshooting.md) | skew incidents |
+| [03 Experiments](chapters/03_experiment_tracking_model_versioning.md) | [04 Registry](chapters/04_model_registry_governance.md) | runs become versions |
+| [04 Registry](chapters/04_model_registry_governance.md) | [05 CI/CD/CT](chapters/05_cicd_ct_automation_pipelines.md) | gates + promotion |
+| [04 Registry](chapters/04_model_registry_governance.md) | [10 Security](chapters/10_security_privacy_compliance.md) | RBAC + approvals |
+| [05 CI/CD/CT](chapters/05_cicd_ct_automation_pipelines.md) | [06 Serving](chapters/06_model_serving_architecture.md) | builds images |
+| [05 CI/CD/CT](chapters/05_cicd_ct_automation_pipelines.md) | [07 Deployment](chapters/07_deployment_strategies_traffic_routing.md) | progressive delivery |
+| [08 Monitoring](chapters/08_monitoring_observability_alerting.md) | [05 CI/CD/CT](chapters/05_cicd_ct_automation_pipelines.md) | retrain trigger |
+| [06 Serving](chapters/06_model_serving_architecture.md) | [07 Deployment](chapters/07_deployment_strategies_traffic_routing.md) | versions to route |
+| [06 Serving](chapters/06_model_serving_architecture.md) | [08 Monitoring](chapters/08_monitoring_observability_alerting.md) | metrics + logs |
+| [09 Infra & K8s](chapters/09_infrastructure_containerization_orchestration.md) | [06 Serving](chapters/06_model_serving_architecture.md) | hosts serving |
+| [07 Deployment](chapters/07_deployment_strategies_traffic_routing.md) | [08 Monitoring](chapters/08_monitoring_observability_alerting.md) | canary analysis |
+| [07 Deployment](chapters/07_deployment_strategies_traffic_routing.md) | [11 Failures](chapters/11_production_failures_troubleshooting.md) | rollback |
+| [09 Infra & K8s](chapters/09_infrastructure_containerization_orchestration.md) | [11 Failures](chapters/11_production_failures_troubleshooting.md) | OOM, cold start |
+| [10 Security](chapters/10_security_privacy_compliance.md) | [06 Serving](chapters/06_model_serving_architecture.md) | endpoint hardening |
+| [10 Security](chapters/10_security_privacy_compliance.md) | [09 Infra & K8s](chapters/09_infrastructure_containerization_orchestration.md) | pod + supply-chain security |
+| [11 Failures](chapters/11_production_failures_troubleshooting.md) | [12 Interview Kit](chapters/12_mlops_interview_cheatsheet_system_design.md) | interview stories |
 
 </details>
 
@@ -74,40 +104,40 @@ Follow the **[30-Day Course](COURSE-30-DAY.md)**: daily reading, hands-on lab, i
 <details>
 <summary><b>Decision trees for every module</b></summary>
 
-### 01 · [Foundations](01-mlops-foundations-system-design.md)
+### 01 · [Foundations](chapters/01_mlops_foundations_system_design.md)
 <img src="assets/tree_01_decisions.svg" alt="Decision tree for Foundations" width="100%"/>
 
-### 02 · [Data & Features](02-data-engineering-feature-stores.md)
+### 02 · [Data & Features](chapters/02_data_engineering_feature_stores.md)
 <img src="assets/tree_02_decisions.svg" alt="Decision tree for Data & Features" width="100%"/>
 
-### 03 · [Experiments](03-experiment-tracking-model-versioning.md)
+### 03 · [Experiments](chapters/03_experiment_tracking_model_versioning.md)
 <img src="assets/tree_03_decisions.svg" alt="Decision tree for Experiments" width="100%"/>
 
-### 04 · [Registry](04-model-registry-governance.md)
+### 04 · [Registry](chapters/04_model_registry_governance.md)
 <img src="assets/tree_04_decisions.svg" alt="Decision tree for Registry" width="100%"/>
 
-### 05 · [CI/CD/CT](05-cicd-ct-automation-pipelines.md)
+### 05 · [CI/CD/CT](chapters/05_cicd_ct_automation_pipelines.md)
 <img src="assets/tree_05_decisions.svg" alt="Decision tree for CI/CD/CT" width="100%"/>
 
-### 06 · [Serving](06-model-serving-architecture.md)
+### 06 · [Serving](chapters/06_model_serving_architecture.md)
 <img src="assets/tree_06_decisions.svg" alt="Decision tree for Serving" width="100%"/>
 
-### 07 · [Deployment](07-deployment-strategies-traffic-routing.md)
+### 07 · [Deployment](chapters/07_deployment_strategies_traffic_routing.md)
 <img src="assets/tree_07_decisions.svg" alt="Decision tree for Deployment" width="100%"/>
 
-### 08 · [Monitoring](08-monitoring-observability-alerting.md)
+### 08 · [Monitoring](chapters/08_monitoring_observability_alerting.md)
 <img src="assets/tree_08_decisions.svg" alt="Decision tree for Monitoring" width="100%"/>
 
-### 09 · [Infra & K8s](09-infrastructure-containerization-orchestration.md)
+### 09 · [Infra & K8s](chapters/09_infrastructure_containerization_orchestration.md)
 <img src="assets/tree_09_decisions.svg" alt="Decision tree for Infra & K8s" width="100%"/>
 
-### 10 · [Security](10-security-privacy-compliance.md)
+### 10 · [Security](chapters/10_security_privacy_compliance.md)
 <img src="assets/tree_10_decisions.svg" alt="Decision tree for Security" width="100%"/>
 
-### 11 · [Failures](11-production-failures-troubleshooting.md)
+### 11 · [Failures](chapters/11_production_failures_troubleshooting.md)
 <img src="assets/tree_11_decisions.svg" alt="Decision tree for Failures" width="100%"/>
 
-### 12 · [Interview Kit](12-mlops-interview-cheatsheet-system-design.md)
+### 12 · [Interview Kit](chapters/12_mlops_interview_cheatsheet_system_design.md)
 <img src="assets/tree_12_decisions.svg" alt="Decision tree for Interview Kit" width="100%"/>
 
 </details>
@@ -118,18 +148,30 @@ Follow the **[30-Day Course](COURSE-30-DAY.md)**: daily reading, hands-on lab, i
 
 | # | Module | Target tools | Key concepts |
 |---|---|---|---|
-| 01 | [MLOps Foundations & System Design](01-mlops-foundations-system-design.md) | Git, DVC, Python | Code/Data/Model lifecycles, technical debt (CACE, hidden feedback loops), maturity levels 0–2 |
-| 02 | [Data Engineering & Feature Stores](02-data-engineering-feature-stores.md) | Feast, Great Expectations, Pydantic, Evidently | Offline vs online store, point-in-time joins, schema/data drift, lineage |
-| 03 | [Experiment Tracking & Model Versioning](03-experiment-tracking-model-versioning.md) | MLflow, Weights & Biases, DVC | Reproducibility, metric/artifact logging, data & pipeline versioning |
-| 04 | [Model Registry & Governance](04-model-registry-governance.md) | MLflow Registry, GitHub environments | Aliases vs stages, promotion gates, model cards, audit trails, compliance |
-| 05 | [CI/CD/CT Automation Pipelines](05-cicd-ct-automation-pipelines.md) | GitHub Actions, Argo Workflows, Kubeflow Pipelines | Testing ML, continuous training, drift-triggered retraining, GitOps |
-| 06 | [Model Serving Architecture](06-model-serving-architecture.md) | FastAPI, Triton, TorchServe, Kafka, Ray | Online/batch/stream serving, dynamic batching, gRPC vs REST |
-| 07 | [Deployment Strategies & Traffic Routing](07-deployment-strategies-traffic-routing.md) | Istio, Envoy, Argo Rollouts | Blue/green, canary, shadow, A/B testing, rollback |
-| 08 | [Monitoring, Observability & Alerting](08-monitoring-observability-alerting.md) | Prometheus, Grafana, Evidently AI, Alertmanager | Data/concept/prior-shift drift, SLOs, delayed-label quality, alert design |
-| 09 | [Infrastructure: Containers & Orchestration](09-infrastructure-containerization-orchestration.md) | Docker, Kubernetes, KEDA, Ray, Spark | Multi-stage images, probes, HPA, Ingress, GPU scheduling, distributed compute |
-| 10 | [Security, Privacy & Compliance](10-security-privacy-compliance.md) | OIDC/JWT, Istio, Kong, Opacus, Flower | Poisoning, extraction, DP, federated learning, RBAC, gateway authN |
-| 11 | [Production Failures & Troubleshooting](11-production-failures-troubleshooting.md) | py-spy, memray, DCGM, circuit breakers | Memory leaks, OOM, cold starts, deadlocks, feature inconsistency, fallbacks |
-| 12 | [Interview Cheatsheet & System Design](12-mlops-interview-cheatsheet-system-design.md) | — | Trade-off frameworks, design templates, right-vs-wrong patterns, rapid-fire Q&A |
+| 01 | [MLOps Foundations & System Design](chapters/01_mlops_foundations_system_design.md) | Git, DVC, Python | Code/Data/Model lifecycles, technical debt (CACE, hidden feedback loops), maturity levels 0–2 |
+| 02 | [Data Engineering & Feature Stores](chapters/02_data_engineering_feature_stores.md) | Feast, Great Expectations, Pydantic, Evidently | Offline vs online store, point-in-time joins, schema/data drift, lineage |
+| 03 | [Experiment Tracking & Model Versioning](chapters/03_experiment_tracking_model_versioning.md) | MLflow, Weights & Biases, DVC | Reproducibility, metric/artifact logging, data & pipeline versioning |
+| 04 | [Model Registry & Governance](chapters/04_model_registry_governance.md) | MLflow Registry, GitHub environments | Aliases vs stages, promotion gates, model cards, audit trails, compliance |
+| 05 | [CI/CD/CT Automation Pipelines](chapters/05_cicd_ct_automation_pipelines.md) | GitHub Actions, Argo Workflows, Kubeflow Pipelines | Testing ML, continuous training, drift-triggered retraining, GitOps |
+| 06 | [Model Serving Architecture](chapters/06_model_serving_architecture.md) | FastAPI, Triton, TorchServe, Kafka, Ray | Online/batch/stream serving, dynamic batching, gRPC vs REST |
+| 07 | [Deployment Strategies & Traffic Routing](chapters/07_deployment_strategies_traffic_routing.md) | Istio, Envoy, Argo Rollouts | Blue/green, canary, shadow, A/B testing, rollback |
+| 08 | [Monitoring, Observability & Alerting](chapters/08_monitoring_observability_alerting.md) | Prometheus, Grafana, Evidently AI, Alertmanager | Data/concept/prior-shift drift, SLOs, delayed-label quality, alert design |
+| 09 | [Infrastructure: Containers & Orchestration](chapters/09_infrastructure_containerization_orchestration.md) | Docker, Kubernetes, KEDA, Ray, Spark | Multi-stage images, probes, HPA, Ingress, GPU scheduling, distributed compute |
+| 10 | [Security, Privacy & Compliance](chapters/10_security_privacy_compliance.md) | OIDC/JWT, Istio, Kong, Opacus, Flower | Poisoning, extraction, DP, federated learning, RBAC, gateway authN |
+| 11 | [Production Failures & Troubleshooting](chapters/11_production_failures_troubleshooting.md) | py-spy, memray, DCGM, circuit breakers | Memory leaks, OOM, cold starts, deadlocks, feature inconsistency, fallbacks |
+| 12 | [Interview Cheatsheet & System Design](chapters/12_mlops_interview_cheatsheet_system_design.md) | — | Trade-off frameworks, design templates, right-vs-wrong patterns, rapid-fire Q&A |
+| 13 | [Testing for ML Systems](chapters/13_testing_for_ml_systems.md) | pytest, invariance and slice tests | Data, model, behavioural and slice tests; golden sets; making silent failures loud before release |
+| 14 | [Streaming & Real-Time ML](chapters/14_streaming_realtime_ml.md) | Kafka, Flink | Windows, watermarks, train/serve parity for streaming features, online learning |
+| 15 | [Distributed Training, GPU Scheduling & Tuning](chapters/15_distributed_training_gpu_scheduling_tuning.md) | FSDP/ZeRO, Kueue | Parallelism, checkpointing and fault tolerance, queueing and fair share, hyperparameter search, throughput diagnosis |
+| 16 | [ML Platform Engineering & FinOps](chapters/16_ml_platform_engineering_finops.md) | Golden paths, policy-as-code | Multi-tenancy, platform as a product, unit economics, cost attribution |
+| 17 | [Responsible ML in Practice](chapters/17_responsible_ml_in_practice.md) | SHAP, model cards | Fairness metrics and trade-offs, explainability, calibration, governance in practice |
+| 18 | [Domain Playbooks](chapters/18_domain_playbooks.md) | Two-tower, fraud, backtesting | Recommenders, fraud, forecasting, vision/NLP and decision-centric ML in production |
+| 19 | [Bridge to LLMOps](chapters/19_bridge_to_llmops.md) | Prompt registry, eval gates | What carries over from MLOps to LLM applications and what changes |
+| 20 | [Production Projects & Labs Blueprint](chapters/20_production_projects_labs_blueprint.md) | Pipeline, feature store, CI/CD/CT | Five portfolio-grade builds with acceptance tests and failure drills |
+| 21 | [Learning Roadmap & Interview Study Plan](chapters/21_learning_roadmap_interview_study_plan.md) | Rubrics, papers, books | Skill ladder, 72-hour to 8-week plans, curated reading list (complements the 30-day course) |
+| 22 | [Mock Interview & System-Design Question Bank](chapters/22_mock_interview_system_design_bank.md) | Fraud, platform and incident designs | Worked designs, incident drills, behavioural frames with scoring |
+
+**Modules 13-22 and the extension sections (numbered `N.15` and up in modules 01-12)** use a five-part *concept* format: **Conceptual Deep Dive**, **Cross-Connection Scenarios**, **Production Anti-Patterns**, **Minimal Working Code** (two runnable blocks) and **Interview Angle** (questions with concise model answers stating a trade-off and a measurable check).
 
 ---
 
@@ -310,29 +352,52 @@ Clean up: `docker compose down -v` · `minikube delete`.
 1. **Read** a module's theory and tables, then **run** the code. Understanding comes from breaking things.
 2. **Cover the ✅ answers**, answer each interview question aloud, then compare.
 3. **Study the ❌ traps:** knowing why a plausible answer fails is what separates senior from junior responses.
-4. **Close with [Module 12](12-mlops-interview-cheatsheet-system-design.md)** for frameworks and rapid-fire review.
+4. **Close with [Module 12](chapters/12_mlops_interview_cheatsheet_system_design.md)** for frameworks and rapid-fire review.
+
+## ✅ Quality and Verification
+
+This edition was produced with a **plan, write, audit** loop: a lead agent audited the repo against a total MLOps concept map, writer agents wrote the new material from precise outlines, and a fixer corrected defects in the original modules.
+
+| Check | How | Result |
+|---|---|---|
+| Structure | `scripts/audit.py`: every `N.M` section has the five parts and a code block; required concepts present | 0 issues |
+| Python syntax | every ```python block parsed with `ast` | 0 errors |
+| Runtime | stdlib/numpy sections executed in a clean directory (`scripts/check_snippets.py`) | 80 sections ran, 0 failed, 32 skipped (third-party) |
+| Cross-references | `scripts/check_xrefs.py` validates section references (sensitivity confirmed with planted errors) | 615 checked, 0 broken |
+| PDFs | one per module from the Markdown source | 22 / 22 |
+
+**Honest limits** (details in [`CROSSCHECK.md`](CROSSCHECK.md)):
+
+- Snippets using third-party libraries (MLflow, Feast, Evidently, Kubeflow, Argo, and similar) are syntax-checked but not executed; flags and APIs drift between versions.
+- The PDFs do not embed the SVG decision and connection diagrams (the PDF library cannot render SVG); the diagrams appear on GitHub and on the site.
+- Manifests in CI/CD examples contain explicit `REPLACE_WITH_...` placeholders where a real checksum or commit SHA cannot be known offline.
+- Perishable facts (versions, prices, regulation details, feature lists) are generic or marked "verify against current docs"; fairness and regulatory content is orientation, not legal advice.
+- The audit is structural; it cannot prove that an explanation is correct.
+
+## 🤝 Contributing
+
+Corrections and missing edge cases are welcome. Edit the module in `chapters/NN_*.md`, or add a section as `extensions/NNb.md` and run `python scripts/merge_extensions.py`, keep the five-part format for numbered sections, then:
+
+```bash
+pip install -r requirements.txt
+python scripts/audit.py && python scripts/check_xrefs.py && python scripts/check_snippets.py
+python scripts/regen_toc.py && python scripts/build_pdfs.py && python scripts/build_site_data.py
+```
 
 ## 📁 Repository Layout
 ```
 mlops-interview-preparation/
 ├── README.md
-├── COURSE-30-DAY.md
-├── assets/
-│   ├── mlops_end_to_end_architecture.svg
-│   ├── tree_00_master_map.svg
-│   └── tree_NN_decisions.svg / tree_NN_connections.svg   (one pair per module)
-├── 01-mlops-foundations-system-design.md
-├── 02-data-engineering-feature-stores.md
-├── 03-experiment-tracking-model-versioning.md
-├── 04-model-registry-governance.md
-├── 05-cicd-ct-automation-pipelines.md
-├── 06-model-serving-architecture.md
-├── 07-deployment-strategies-traffic-routing.md
-├── 08-monitoring-observability-alerting.md
-├── 09-infrastructure-containerization-orchestration.md
-├── 10-security-privacy-compliance.md
-├── 11-production-failures-troubleshooting.md
-└── 12-mlops-interview-cheatsheet-system-design.md
+├── CROSSCHECK.md          # audit report: what changed, what is still missing
+├── COURSE-30-DAY.md       # guided 30-day course
+├── LICENSE
+├── assets/                # SVG architecture, decision and connection diagrams
+├── chapters/              # modules 01-22 (Markdown, source of truth)
+├── extensions/            # expansion sections (merged into chapters)
+├── pdfs/                  # one PDF per module
+├── scripts/               # audit, xref check, snippet runner, TOC, PDF + site builders
+├── site/                  # the streaming-style web app (deployed on Vercel)
+└── docs/screenshots/      # images used in this README
 ```
 
 ## ⚖️ License & Originality

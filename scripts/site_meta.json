@@ -1,0 +1,509 @@
+{
+ "config": {
+  "brand": "MLOPS",
+  "year": "2026",
+  "title": "MLOps Interview Preparation",
+  "storage": "mlops26",
+  "repo": "https://github.com/vishalgwu/mlops-interview-preparation",
+  "kicker": "INTERVIEW PREP SERIES",
+  "gateTitle": "Who's interviewing?",
+  "gateSub": "Pick a profile and the catalogue reorders itself for your interview.",
+  "top10Title": "Top 10 MLOps Modules Today",
+  "conceptsTitle": "Trending MLOps Concepts (Changes Daily)",
+  "newChapters": [
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22
+  ],
+  "newLabel": "NEW",
+  "posterTag": "MLOPS",
+  "episodeBlurb": "Every episode follows the same arc: Conceptual Deep Dive, Cross-Connection Scenarios, Production Anti-Patterns, Minimal Working Code and an Interview Angle with model answers.",
+  "episodeSub": "Deep dive, scenarios, anti-patterns, code and interview angle",
+  "search": "Titles, concepts, tools, interview topics",
+  "description": "A senior-level MLOps interview preparation series: production ML platforms, monitoring, CI/CD/CT, serving, governance, runnable code and worked system-design answers."
+ },
+ "chapters": {
+  "1": {
+   "title": "MLOps Foundations & System Design",
+   "tagline": "Three artifacts, three clocks: frame the problem, size the system and own it in production.",
+   "level": "Beginner",
+   "genres": [
+    "Foundations",
+    "System Design"
+   ],
+   "cast": [
+    "Maturity levels",
+    "Technical debt",
+    "Problem framing",
+    "SLOs"
+   ]
+  },
+  "2": {
+   "title": "Data Engineering & Feature Stores",
+   "tagline": "Garbage in, silent failure out: contracts, point-in-time joins, labels and feature platforms.",
+   "level": "Intermediate",
+   "genres": [
+    "Data",
+    "Features"
+   ],
+   "cast": [
+    "Feast",
+    "Great Expectations",
+    "PIT joins",
+    "Labeling"
+   ]
+  },
+  "3": {
+   "title": "Experiment Tracking & Model Versioning",
+   "tagline": "If you cannot reproduce it, you cannot ship it: MLflow, DVC, lineage and honest comparisons.",
+   "level": "Intermediate",
+   "genres": [
+    "Reproducibility",
+    "Tracking"
+   ],
+   "cast": [
+    "MLflow",
+    "DVC",
+    "W&B",
+    "Bootstrap CIs"
+   ]
+  },
+  "4": {
+   "title": "Model Registry & Governance",
+   "tagline": "Aliases, gates, model cards and approvals: promotion you can defend to an auditor.",
+   "level": "Intermediate",
+   "genres": [
+    "Governance",
+    "Registry"
+   ],
+   "cast": [
+    "Aliases",
+    "Promotion gates",
+    "Model cards",
+    "Risk tiers"
+   ]
+  },
+  "5": {
+   "title": "CI/CD/CT Automation Pipelines",
+   "tagline": "Continuous training without retrain storms: orchestrators, idempotency and GitOps.",
+   "level": "Intermediate",
+   "genres": [
+    "Automation",
+    "Pipelines"
+   ],
+   "cast": [
+    "GitHub Actions",
+    "Argo",
+    "Kubeflow",
+    "Airflow"
+   ]
+  },
+  "6": {
+   "title": "Model Serving Architecture",
+   "tagline": "Online, batch and streaming serving with tail-latency discipline and optimised models.",
+   "level": "Advanced",
+   "genres": [
+    "Serving",
+    "Latency"
+   ],
+   "cast": [
+    "FastAPI",
+    "Triton",
+    "Kafka",
+    "Quantization"
+   ]
+  },
+  "7": {
+   "title": "Deployment Strategies & Traffic Routing",
+   "tagline": "Shadow, canary, A/B and bandits: ship risky models without risking the business.",
+   "level": "Advanced",
+   "genres": [
+    "Delivery",
+    "Experimentation"
+   ],
+   "cast": [
+    "Istio",
+    "Argo Rollouts",
+    "CUPED",
+    "Bandits"
+   ]
+  },
+  "8": {
+   "title": "Monitoring, Observability & Alerting",
+   "tagline": "Drift, delayed labels and burn-rate alerts: know before the business tells you.",
+   "level": "Advanced",
+   "genres": [
+    "Monitoring",
+    "Drift"
+   ],
+   "cast": [
+    "Prometheus",
+    "Evidently",
+    "SLO burn",
+    "Label-free estimation"
+   ]
+  },
+  "9": {
+   "title": "Infrastructure: Containers & Orchestration",
+   "tagline": "Kubernetes, autoscaling, GPUs and storage: the platform under the model.",
+   "level": "Advanced",
+   "genres": [
+    "Infrastructure",
+    "Kubernetes"
+   ],
+   "cast": [
+    "HPA",
+    "KEDA",
+    "Ray",
+    "GPU sharing"
+   ]
+  },
+  "10": {
+   "title": "Security, Privacy & Compliance",
+   "tagline": "Poisoning, extraction, DP, erasure and audit readiness for ML systems.",
+   "level": "Advanced",
+   "genres": [
+    "Security",
+    "Privacy"
+   ],
+   "cast": [
+    "RBAC",
+    "Differential privacy",
+    "cosign",
+    "Erasure"
+   ]
+  },
+  "11": {
+   "title": "Production Failures & Troubleshooting",
+   "tagline": "Memory leaks, OOM, cold starts and a postmortem library: debug like an on-call veteran.",
+   "level": "Advanced",
+   "genres": [
+    "Incidents",
+    "Debugging"
+   ],
+   "cast": [
+    "tracemalloc",
+    "Circuit breakers",
+    "Postmortems",
+    "RCA playbook"
+   ]
+  },
+  "12": {
+   "title": "MLOps Interview Cheatsheet & System Design",
+   "tagline": "R-A-D-I-O-M framework, trade-off tables, numbers and estimation toolkit.",
+   "level": "All levels",
+   "genres": [
+    "Interview",
+    "System Design"
+   ],
+   "cast": [
+    "R-A-D-I-O-M",
+    "Trade-offs",
+    "Back-of-envelope",
+    "Staff signals"
+   ]
+  },
+  "13": {
+   "title": "Testing for ML Systems",
+   "tagline": "Data, model, behavioural and slice tests: make silent failures loud before release.",
+   "level": "Intermediate",
+   "genres": [
+    "Testing",
+    "Quality"
+   ],
+   "cast": [
+    "Invariance tests",
+    "Slices",
+    "Golden sets",
+    "ML Test Score"
+   ]
+  },
+  "14": {
+   "title": "Streaming & Real-Time ML",
+   "tagline": "Windows, watermarks, parity and online learning: when seconds matter.",
+   "level": "Advanced",
+   "genres": [
+    "Streaming",
+    "Real-time"
+   ],
+   "cast": [
+    "Flink",
+    "Kafka",
+    "Watermarks",
+    "Online learning"
+   ]
+  },
+  "15": {
+   "title": "Distributed Training, GPU Scheduling & Tuning",
+   "tagline": "Parallelism, fault tolerance, queues and HPO: train big without burning cash.",
+   "level": "Advanced",
+   "genres": [
+    "Training",
+    "GPU"
+   ],
+   "cast": [
+    "FSDP/ZeRO",
+    "Checkpointing",
+    "Kueue",
+    "ASHA"
+   ]
+  },
+  "16": {
+   "title": "ML Platform Engineering & FinOps",
+   "tagline": "Golden paths, multi-tenancy and unit economics: platform as a product.",
+   "level": "Advanced",
+   "genres": [
+    "Platform",
+    "Cost"
+   ],
+   "cast": [
+    "Golden paths",
+    "Policy-as-code",
+    "FinOps",
+    "Spot"
+   ]
+  },
+  "17": {
+   "title": "Responsible ML in Practice",
+   "tagline": "Fairness, explainability, governance and calibration beyond the slide deck.",
+   "level": "Advanced",
+   "genres": [
+    "Responsible AI",
+    "Governance"
+   ],
+   "cast": [
+    "Equalized odds",
+    "SHAP",
+    "Model cards",
+    "Conformal"
+   ]
+  },
+  "18": {
+   "title": "Domain Playbooks",
+   "tagline": "Recommenders, fraud, forecasting, vision/NLP and decision-centric ML in production.",
+   "level": "Advanced",
+   "genres": [
+    "Domains",
+    "Playbooks"
+   ],
+   "cast": [
+    "Two-tower",
+    "Fraud",
+    "Backtesting",
+    "Uplift"
+   ]
+  },
+  "19": {
+   "title": "Bridge to LLMOps",
+   "tagline": "What carries over from MLOps to LLM apps and what changes.",
+   "level": "Intermediate",
+   "genres": [
+    "LLM",
+    "Bridge"
+   ],
+   "cast": [
+    "Prompt registry",
+    "Eval gates",
+    "Token cost",
+    "Routing"
+   ]
+  },
+  "20": {
+   "title": "Production Projects & Labs Blueprint",
+   "tagline": "Five portfolio-grade builds with acceptance tests and failure drills.",
+   "level": "Intermediate",
+   "genres": [
+    "Projects",
+    "Labs"
+   ],
+   "cast": [
+    "Pipeline",
+    "Feature store",
+    "CI/CD/CT",
+    "Capstone"
+   ]
+  },
+  "21": {
+   "title": "Learning Roadmap & Interview Study Plan",
+   "tagline": "Skill ladder, 72-hour to 8-week plans and a curated reading list.",
+   "level": "All levels",
+   "genres": [
+    "Plan",
+    "Study"
+   ],
+   "cast": [
+    "Rubrics",
+    "Papers",
+    "Books",
+    "Mock cadence"
+   ]
+  },
+  "22": {
+   "title": "Mock Interview & System-Design Question Bank",
+   "tagline": "Worked designs, incident drills and behavioural frames with scoring.",
+   "level": "All levels",
+   "genres": [
+    "Interview",
+    "Practice"
+   ],
+   "cast": [
+    "Fraud design",
+    "Platform design",
+    "Incidents",
+    "Curveballs"
+   ]
+  }
+ },
+ "rows": [
+  {
+   "id": "start",
+   "title": "Start Here: Frameworks & Study Plans",
+   "chapters": [
+    1,
+    21,
+    12,
+    22
+   ]
+  },
+  {
+   "id": "data",
+   "title": "Data, Features & Experiments",
+   "chapters": [
+    2,
+    3,
+    13,
+    14
+   ]
+  },
+  {
+   "id": "ship",
+   "title": "Ship It: Registry, Pipelines, Serving & Rollouts",
+   "chapters": [
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "id": "run",
+   "title": "Run It: Monitoring, Infrastructure & Scale",
+   "chapters": [
+    8,
+    9,
+    15,
+    16
+   ]
+  },
+  {
+   "id": "trust",
+   "title": "Trust, Safety & Failure",
+   "chapters": [
+    10,
+    17,
+    11
+   ]
+  },
+  {
+   "id": "practice",
+   "title": "Practice: Domains, LLM Bridge & Projects",
+   "chapters": [
+    18,
+    19,
+    20
+   ]
+  }
+ ],
+ "top10": [
+  12,
+  22,
+  8,
+  7,
+  2,
+  5,
+  13,
+  11,
+  6,
+  18
+ ],
+ "featured": [
+  22,
+  13,
+  8,
+  12
+ ],
+ "profiles": [
+  {
+   "id": "sprint",
+   "name": "Interview in 72 hours",
+   "role": "Cramming for a loop this week",
+   "initial": "7",
+   "color": "#E50914",
+   "rec": [
+    12,
+    22,
+    1,
+    8,
+    7,
+    6,
+    11
+   ]
+  },
+  {
+   "id": "staff",
+   "name": "Senior / Staff loop",
+   "role": "System design and platform leadership",
+   "initial": "S",
+   "color": "#B20710",
+   "rec": [
+    22,
+    16,
+    15,
+    17,
+    8,
+    7,
+    18,
+    14
+   ]
+  },
+  {
+   "id": "platform",
+   "name": "Platform engineer",
+   "role": "Infrastructure, pipelines and cost",
+   "initial": "P",
+   "color": "#831010",
+   "rec": [
+    9,
+    16,
+    15,
+    5,
+    6,
+    10,
+    14
+   ]
+  },
+  {
+   "id": "switch",
+   "name": "Career switcher",
+   "role": "New to production ML",
+   "initial": "N",
+   "color": "#5b5b5b",
+   "rec": [
+    21,
+    1,
+    2,
+    3,
+    5,
+    13,
+    20
+   ]
+  }
+ ]
+}

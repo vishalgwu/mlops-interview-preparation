@@ -1,0 +1,30 @@
+{
+ "title": "MLOps Interview Preparation",
+ "short": "MLOps",
+ "expected_chapters": 22,
+ "required_parts": [
+  "Conceptual Deep Dive",
+  "Cross-Connection Scenarios",
+  "Production Anti-Patterns",
+  "Minimal Working Code",
+  "Interview Angle"
+ ],
+ "reference_chapters": [
+  "01_mlops_foundations_system_design",
+  "02_data_engineering_feature_stores",
+  "03_experiment_tracking_model_versioning",
+  "04_model_registry_governance",
+  "05_cicd_ct_automation_pipelines",
+  "06_model_serving_architecture",
+  "07_deployment_strategies_traffic_routing",
+  "08_monitoring_observability_alerting",
+  "09_infrastructure_containerization_orchestration",
+  "10_security_privacy_compliance",
+  "11_production_failures_troubleshooting",
+  "12_mlops_interview_cheatsheet_system_design",
+  "20_production_projects_labs_blueprint",
+  "21_learning_roadmap_interview_study_plan",
+  "22_mock_interview_system_design_bank"
+ ],
+ "pdf_footer": "MLOps Interview Preparation"
+}

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 975 760" width="975" height="760" role="img" aria-label="Decision tree for module 11" font-family="'Segoe UI',Helvetica,Arial,sans-serif">
+<title>Module 11 decision tree: Which failure playbook?</title>
+<rect width="975" height="760" rx="16" fill="#f3f2fb"/>
+<rect x="353.7" y="20.0" width="267.6" height="52.0" rx="26.0" fill="#1f1b5a"/><text x="487.5" y="41.9" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Module 11 · Failures</text><text x="487.5" y="59.9" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Which failure playbook?</text>
+<text x="24" y="30" fill="#5b5a80" font-size="11">Navy oval = decision · pink check = yes · dark cross = no · plain text = what to use, and when</text>
+<path d="M487.5 72.0 V120 H300 V126" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="199.6" y="134.2" width="200.9" height="31.5" rx="15.8" fill="#1f1b5a"/><text x="300" y="154.0" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">Memory grows steadily?</text>
+<path d="M290 165.75 L225 201" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M310 165.75 L375 201" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="225" cy="210" r="9" fill="#e0368c"/><path d="M221 210 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="375" cy="210" r="9" fill="#2d2a6e"/><path d="M371.5 206.5 l7 7 M378.5 206.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="55" y="250" fill="#1b1a3a" font-size="13" font-weight="700">Leak hunt</text><text x="55" y="267" fill="#5b5a80" font-size="11">• tracemalloc snapshot diff</text><text x="55" y="282" fill="#5b5a80" font-size="11">• memray for native leaks</text><text x="55" y="297" fill="#5b5a80" font-size="11">• recycle workers + jitter</text>
+<path d="M379 218 L415 269.25" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="324.6" y="269.2" width="200.9" height="31.5" rx="15.8" fill="#1f1b5a"/><text x="425" y="289.0" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">CUDA OOM at peak only?</text>
+<path d="M415 300.75 L350 336" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M435 300.75 L500 336" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="350" cy="345" r="9" fill="#e0368c"/><path d="M346 345 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="500" cy="345" r="9" fill="#2d2a6e"/><path d="M496.5 341.5 l7 7 M503.5 341.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="180" y="385" fill="#1b1a3a" font-size="13" font-weight="700">Bound + split</text><text x="180" y="402" fill="#5b5a80" font-size="11">• cap batch and sequence</text><text x="180" y="417" fill="#5b5a80" font-size="11">• OOM &gt; split batch &gt; retry</text><text x="180" y="432" fill="#5b5a80" font-size="11">• expandable_segments</text>
+<path d="M504 353 L540 404.25" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="463.8" y="396.5" width="172.3" height="47.0" rx="23.5" fill="#1f1b5a"/><text x="550" y="416.3" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">Requests hang, CPU</text><text x="550" y="431.8" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">idle?</text>
+<path d="M540 443.5 L475 471" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M560 443.5 L625 471" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="475" cy="480" r="9" fill="#e0368c"/><path d="M471 480 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="625" cy="480" r="9" fill="#2d2a6e"/><path d="M621.5 476.5 l7 7 M628.5 476.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="305" y="520" fill="#1b1a3a" font-size="13" font-weight="700">Deadlock check</text><text x="305" y="537" fill="#5b5a80" font-size="11">• py-spy dump</text><text x="305" y="552" fill="#5b5a80" font-size="11">• timeouts + bulkheads</text><text x="305" y="567" fill="#5b5a80" font-size="11">• no blocking calls in async</text>
+<path d="M629 488 L665 531.5" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<rect x="578.1" y="539.2" width="193.7" height="31.5" rx="15.8" fill="#1f1b5a"/><text x="675" y="559.0" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="700">A dependency is down?</text>
+<path d="M665 570.75 L600 606" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<path d="M685 570.75 L750 606" stroke="#aaa8c8" stroke-width="1.2" fill="none"/>
+<circle cx="600" cy="615" r="9" fill="#e0368c"/><path d="M596 615 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="750" cy="615" r="9" fill="#2d2a6e"/><path d="M746.5 611.5 l7 7 M753.5 611.5 l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+<text x="430" y="655" fill="#1b1a3a" font-size="13" font-weight="700">Tiered fallback</text><text x="430" y="672" fill="#5b5a80" font-size="11">• circuit breaker</text><text x="430" y="687" fill="#5b5a80" font-size="11">• fallback model, then rules</text><text x="430" y="702" fill="#5b5a80" font-size="11">• flag degraded rows</text>
+<text x="710" y="655" fill="#1b1a3a" font-size="13" font-weight="700">Cold-start fix</text><text x="710" y="672" fill="#5b5a80" font-size="11">• warm-up before ready</text><text x="710" y="687" fill="#5b5a80" font-size="11">• minReplicas &gt;= 1-2</text><text x="710" y="702" fill="#5b5a80" font-size="11">• pre-pulled slim image</text>
+<text x="24" y="738" fill="#5b5a80" font-size="11" font-style="italic">Details, code and interview Q&amp;A: 11-production-failures-troubleshooting.md</text>
+</svg>
